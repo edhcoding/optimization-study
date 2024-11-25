@@ -13,6 +13,10 @@ JSON Server 란
 - Json Server를 이용하면 JSON 파일을 데이터베이스처럼 동작하게 할 수 있고, HTTP 메서드를 활용하여 데이터에 접근하고 수정할 수 있는 api를 만들 수 있습니다.
 - https://github.com/typicode/json-server
 
+목차
+1. Json Server 설치
 yarn add -D json-server
+2. db.json 파일 생성
 db.json 파일 생성
-json-server --watch db.json --port 3000
+3. package.json 파일에 스크립트 추가 (--watch 옵션을 추가해줘야 데이터가 변경될 때마다 자동으로 서버가 재시작됩니다. 끄고 킬 필요없음)
+"dev:db": "json-server --watch db.json --port=8888"
