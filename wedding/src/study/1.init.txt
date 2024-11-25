@@ -92,6 +92,22 @@ module.exports = {
 "extends": "./tsconfig.paths.json",
 "include": [..., "tsconfig.paths.json"] (추가)
 
+6. package.json에 스크립트 추가
+기존
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+  "dev:db": "json-server --watch db.json --port=8888"
+},
+변경 (craco 사용)
+"start": "craco start",
+"build": "craco build",
+"test": "craco test",
+
 SCSS
 SCSS는 CSS의 기능을 확장시켜주는 도구임
 
