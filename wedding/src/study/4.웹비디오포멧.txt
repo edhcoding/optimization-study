@@ -1,0 +1,29 @@
+- 크게 2가지
+1. MP4 (MPEG-4 Part 14): MP4는 최신 웹 브라우저 대부분과 호환되는 인터넷 친화적인 비디오 포맷입니다. 
+이 포맷은 품질이 좋고 파일 크기가 작아, 웹에서 동영상을 재생하는데 인기 있는 선택지입니다.
+
+2. WebM: WebM은 HTML5 비디오 및 오디오 태그와 함께 사용하기 위해 Google이 개발한 비디오 포맷입니다. 
+고화질 동영상을 손실 없이 효과적으로 압축할 수 있는 고성능 비디오 코덱인 VP8 및 VP9를 지원합니다.
+좋지만 지원하는 브라우저가 적음 (IE 같은 경우에는 지원 안함)
+
+그래서 요즘은 WebM과 MP4를 함께 제공하는 것이 좋음
+
+video 태그를 이용해서 동영상을 노출할 거임
+https://developer.mozilla.org/ko/docs/Web/HTML/Element/video
+
+예시)
+<video controls width="250">
+  <source src="/media/cc0-videos/flower.webm" type="video/webm" /> webm 부터 쓰고 지원안하면
+
+  <source src="/media/cc0-videos/flower.mp4" type="video/mp4" /> mp4를 사용하겠다는 의미로 위아래 2개 써줌
+
+  Download the
+  <a href="/media/cc0-videos/flower.webm">WEBM</a>
+  or
+  <a href="/media/cc0-videos/flower.mp4">MP4</a>
+  video.
+</video>
+
+- video poster 속성
+동영상이 로딩될때 또는 재생버튼을 누르기 전에 보여줄 이미지를 넣어주는 역할 (썸네일 같은 느낌?)
+https://developer.mozilla.org/ko/docs/Web/HTML/Element/video

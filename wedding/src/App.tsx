@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react'
 
 import styles from './App.module.scss'
 
-import FullScreenMessage from './components/shared/FullScreenMessage'
+import FullScreenMessage from '@shared/FullScreenMessage'
+import Heading from '@/components/sections/Heading'
+import Video from '@/components/sections/Video'
+import { Wedding } from '@/models/wedding'
 
 const cx = classNames.bind(styles)
 
 function App() {
-  const [wedding, setWedding] = useState(null)
+  const [wedding, setWedding] = useState<Wedding | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
 
@@ -16,7 +19,7 @@ function App() {
   useEffect(() => {
     setLoading(true)
 
-    fetch('http://localhost:8888/wedding2')
+    fetch('http://localhost:8888/wedding')
       .then((res) => {
         if (res.ok === false) {
           // fetch에서 404는 then으로 성공처리 되기 때문에 then에서 예외처리를 꼭 해줘야 catch로 넘어간다.
@@ -47,7 +50,19 @@ function App() {
     return <FullScreenMessage type="error" />
   }
 
-  return <div className={cx('container')}>{JSON.stringify(wedding)}</div>
+  if (wedding === null) {
+    return null
+  }
+
+  const { date } = wedding
+
+  return (
+    <div className={cx('container')}>
+      <Heading date={date} />
+      <Video />
+      {JSON.stringify(wedding)}
+    </div>
+  )
 }
 
 export default App
