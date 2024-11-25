@@ -1,0 +1,60 @@
+폰트의 다양한 포맷
+TTF/OTF는 벡터기반의 폰트형식으로 스켈일이 변해도 품질이 유지되며 모든 운영체제에서 지원함
+
+WOFF,WOFF2는 웹용으로 개발된 압축 폰트 형식임
+빠른 다운로드와 웹 성능을 제공함
+
+SVG형식도 있지만 잘 사용하지 않음 PASS
+
+EOT는 웹용으로 마이크로소프트가 계발한 폰트 형식임 주로 IE6에서 사용됨
+
+이렇게 폰트 지원 형식이 다양하다 보니 다양한 폰트 형식을 지원해주는게 좋음
+
+폰트를 사용함에 있어서 사이즈도 중요
+EOT -> TTF/OTF -> WOFF -> WOFF2 왼쪽에서 오른쪽으로 갈 수록 용량이 작음
+
+웹페이지를 만들거기 때문에 주로 WOFF, WOFF2를 사용함
+- 하지만 WOFF2는 조금 더 최신기술이므로 지원하지 않는 브라우저도 있을 수 있음
+- 따라서 WOFF2를 사용하지 않는 브라우저는 WOFF를 사용하도록 해볼거임
+
+폰트적용방법
+1. 웹 폰트 서비스 이용
+ex) Google Fonts, Noto Sans KR
+ex) <link href="https://fonts.googleapis.com (폰트 서비스)">
+
+2. 폰트 다운로드
+ex) @font-face {
+    font-family: 'Noto Sans KR'(폰트 이름);
+    src: url('./fonts/NotoSansKR-Regular.otf') format('opentype') (폰트 경로);
+}
+
+웹 폰틋 서비스 이용 방법
+1. https://hangeul.naver.com/font
+2. 원하는 폰트 선택 후 url 복사
+- index.html 파일에 적용
+- css 파일에 body, font-family 적용 (이름은 사이트에 올라와 있는걸로)
+3. 서비스에 적용
+
+- 폰트 추가, 제거하고 관리하기 쉬움
+- 외부서비스에 의존해야하고 외부 서버에서 폰트 가져오는 동작이 느려지면 초기 로딩 속도에도 지장이 감
+
+폰트 다운로드 방법
+1. 폰트 파일 다운로드
+- 다운 받으면 ttf, otf 파일임 (많이 무거움)
+- https://cloudconvert.com/ 이 사이트에서 파일 형식 woff, woff2로 변환
+2. assets/fonts 폴더에 폰트 파일 저장
+- src 내부에 넣어야 번들링에 포함이 되어서 최적화 효과를 볼 수 있음
+3. font.scss 파일에 폰트 적용
+@font-face {
+  font-family: 'NanumSquareRound';
+  src:
+    url('../assets/fonts/NanumSquareRoundR.woff2') format('woff2'),
+    url('../assets/fonts/NanumSquareRoundR.woff') format('woff'),
+    url('../assets/fonts/NanumSquareRoundR.ttf') format('truetype');
+}
+- 이렇게 해야 적용안될 경우에는 그 아래꺼 그 아래꺼로 넘어감
+4. css 파일에 body, font-family 적용 (이름은 사이트에 올라와 있는걸로)
+- 이렇게 css를 이용하는 방식은 웹 사이트가 항상 동일한 폰트를 보장함
+- 외부서비스에 의존하지 않기 때문에 외부 서비스의 이슈에 영향을 받지 않음
+- 그 대신에 폰트 파일을 프로젝트 내부에서 관리해야하고 파일관리와 서버 용량에 대한 부담이 있을 수 있음
+- 폰트가 업데이트 될 경우에는 수동으로 폰트 파일을 업데이트 해줘야 한다는 단점도 있음
