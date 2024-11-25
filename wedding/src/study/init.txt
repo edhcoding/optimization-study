@@ -46,3 +46,58 @@ sudo corepack enable
 4-1) yarn dlx @yarnpkg/sdks vscode
 
 그다음 다시 설정 yarn set version berry
+
+eslint, prettier 설정
+0. vscode extension에서 ESLint, Prettier - Code formatter 설치
+1. yarn add -D eslint prettier eslint-plugin-prettier eslint-config-prettier eslint-plugin-react eslint-config-react-app
+- package.json에 보면 기존 eslintConfig가 있음, 이걸 지우고 위에 설치한 패키지들을 사용할거임
+2. config 파일 분리
+- .eslintrc.json (yarn add -D eslint@^8.56.0  9버전은 베타라서 다운그레이드 해야함)
+- .prettierrc
+3. yarn dlx @yarnpkg/sdks vscode
+
+4. package.json에 lint 명령어 추가
+"lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+"lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\""
+
+Craco Alias 설정
+Craco는 Create React App Configuration Override의 약자로 CRA의 설정을 커스텀할 수 있는 도구임
+1. yarn add -D @craco/craco
+2. yarn add -D craco-alias
+3. tsconfig.paths.json 파일 생성
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"]
+    }
+  }
+}
+4. craco.config.js 파일 생성
+const CracoAlias = require('craco-alias')
+
+module.exports = {
+  plugins: [
+    {
+      plugin: CracoAlias,
+      options: {
+        source: 'tsconfig',
+        tsConfigPath: 'tsconfig.paths.json',
+      },
+    },
+  ],
+}
+5. Tsconfig에 tsconfig.paths.json extends 시키기
+"extends": "./tsconfig.paths.json",
+"include": [..., "tsconfig.paths.json"] (추가)
+
+SCSS
+SCSS는 CSS의 기능을 확장시켜주는 도구임
+
+CSS의 모든 기능을 포함하고 있고
+변수, 믹스인, 상송과 같은 추가적인 기능들을 제공하여 코드의
+재사용성을 높이고 유지보수를 용이하게 도와줌
+
+설치
+1. yarn add classnames sass (2개 설치)
