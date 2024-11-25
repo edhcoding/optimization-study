@@ -1,0 +1,2 @@
+이미지 좌우로 넘기는 flicking은 라이브러리를 사용할거임
+https://github.com/naver/egjs-flicking - 네이버가 만든 라이브러리임
