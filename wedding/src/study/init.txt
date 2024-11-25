@@ -1,0 +1,48 @@
+프로젝트 환경 구성
+Boilerplate - Create React App + TypeScript
+Rules - ESLint + Prettier
+Style - SCSS
+Package Manager - Yarn Berry (with. pnp)
+
+왜 NPM 을 사용하지 않쓰나요?
+- 무겁고 복잡한 node_modules 폴더 (node_modules는 프로젝트 의존성이 많아지면 많아질수록 거대하고 복잡해짐)
+- 비효율적인 설치와 의존성 검색 (여러 패키지들이 동일한 의존성을 가지고 있음, 하지만 각각 다른 버전을 사용한다고 했을때 npm은 중복된 라이브러리를 설치함
+이는 디스크 공간을 불필요하게 소비하고 패키지 설치나 업데이트에 많은 시간을 소비함, npm은 파일 시스템을 이용해 의존성을 관리하기 때문에 이런 복잡한 구조는
+패키지를 찾아 나가는 과정을 비효율적으로 만들게 된다)
+- 유령 의존성 (npm은 중복된 패키지 의존성을 최소화하여 공간을 절약하고 패키지 설치 시간을 줄이기 위해 호이스팅을 일으키게 됨. 플랫하게 호이스팅을 펼치는 것 ,
+이렇게 되면 package.json에 명시적으로 의존성을 관리하고 있지 않은 패키지에도 접근할 수 있음 = 이를 유령의존성이라고 함,
+이러한 특성은 의존성 관리 시스템을 혼란스럽게 만듬, 그래서 yarn-berry-plug-and-play(pnp) 방식을 이용해 의존성을 관리해볼거임)
+
+yarn berry
+- node_modules를 따로 생성하지 않기 때문에 노드 모듈스 폴더를 순회할 필요가 없음 대신 pnp.cjs에서 패키지 위치와 버전 정보를 관리함
+- disk.io 작업 없이 패키지의 의존성과 라이브러리의 위치를 파악할 수 있음
+- pnp 시스템에서 각 의존성은 zi-archive로 관리되어짐 npm과 다르게 각 패키지는 버전마다 하나의 zip-archive만 생기게 되고 압축파일로 관리하기 때문에 설치 시간을
+단축할 수 있고 효율적인 디스크 용량 확보가 가능함
+- npm과 다르게 의존성을 호이스팅 하지 않음, package.json에 기술된 의존성에만 접근할 수 있음
+- 모든 패키지 설치 정보를 git과 같은 버전 관리 시스템에 기록하고 저장함
+- 프로젝트를 클론하고 패키지를 설치할 필요없이 바로 사용이 가능함 (zero-install이라고 함)
+
+!!! yarn set version berry하는데 오류가 나오면 !!!
+Yarn Berry를 설정할 때 Corepack이 활성화되어 있지 않아서 발생하는 경고임
+Corepack은 Node.js의 패키지 매니저 버전 관리 도구임
+
+macOS/Linux에서는 sudo 사용
+sudo corepack enable
+
+1. 프로젝트 설정
+1) yarn 설치 - npm install -g yarn
+2) CRA 기반 프로젝트 생성 - yarn create react-app 프로젝트명 --template typescript
+
+2. yarn berry (pnp) 설정
+1) yarn berry - 'yarn set version berry'
+
+2) .yarnrc.yml에 node linker설정 - 'nodeLinker: pnp' => pnp 방식을 사용하겠다라고 프로젝트가 이해함
+2-1) enableGlobalCache: false 이것도 .yarnrc.yml에 추가해줘야함
+
+3) yarn install - 'yarn install'
+3-1) 이 상태로 App.tsx 파일을 열면 오류가 남 - typescript도 zip파일로 관리되어서 해석해줘야함
+
+4) yarn berry와 IDE 통합 - ZipFS Plugin 설치
+4-1) yarn dlx @yarnpkg/sdks vscode
+
+그다음 다시 설정 yarn set version berry
