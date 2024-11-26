@@ -1,0 +1,13 @@
+계좌 복사를 구현하려면 클립보드를 사용해야 함
+https://www.npmjs.com/package/react-copy-to-clipboard
+
+내 송금계좌 주소
+https://qr.kakaopay.com/FS05XjnfB
+
+설치
+yarn add react-copy-to-clipboard
+yarn add @types/react-copy-to-clipboard
+
+사용방법
+1. CopyToClipboard 태그로 감싸주고 안에 text 속성에 복사할 텍스트를 넣어줌
+2. onCopy 속성에 복사되었을 때 실행할 함수를 넣어줌
