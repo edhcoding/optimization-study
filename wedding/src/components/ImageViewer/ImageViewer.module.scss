@@ -1,17 +1,10 @@
-.dimmed {
-  position: fixed;
-  inset: 0;
-  background-color: #000;
-  z-index: 9999;
-
-  .ico-close {
-    width: 24px;
-    height: 24px;
-    fill: #ffff;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 2;
-    cursor: pointer;
-  }
+.ico-close {
+  width: 24px;
+  height: 24px;
+  fill: #ffff;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  cursor: pointer;
 }
