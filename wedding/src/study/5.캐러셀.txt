@@ -1,2 +1,5 @@
 이미지 좌우로 넘기는 flicking은 라이브러리를 사용할거임
 https://github.com/naver/egjs-flicking - 네이버가 만든 라이브러리임
+
+egjs-flicking 사용할려고 했는데 swiper 라이브러리가 더 좋아서 swiper 사용할거임
+https://v9.swiperjs.com/ - 더 최신 버전 11 버전있는데 안정화 되어있는 9 버전 사용할거임
