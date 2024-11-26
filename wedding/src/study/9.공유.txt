@@ -1,0 +1,20 @@
+1. 카카오톡 공유하기 (애플리케이션 등록해야 사용가능)
+https://developers.kakao.com/docs/latest/ko/message/message-template
+
+메시지 템플릿 종류는 많음
+그 중 피드 템플릿 사용할거임
+
+메시지도 카카오맵처럼 비동기로 불러와야 보여줄거임
+
+1) 위에 메시지 페이지 접속
+2) 왼쪽 목록에서 카카오톡 공유: JavaScript 클릭 (예제가 있는데 나중에 참고해서 다른 템플릿도 제작가능)
+3) 제일 위에 JS SDK 데모 클릭
+4) 아래 코드 확인 및 편집 보면 src 안에 https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js 이 주소를 가져와서 사용할거임
+5) 코드 작성하고 onload 안에 console.log(window) 추가해보면 전에 타입 추가한 Kakao(첫 글자 대문자임) 객체가 있을거임 우리는 그 안에 있는
+- init 함수 사용해서 카카오 객체를 사용가능하게 초기화, initialized 함수 사용해서 카카오 메시지 SDK 사용할 준비가 되어있는지 판단가능
+
+6) window.Kakao.init() 해서 초기화가 되었다면
+- window.Kakao 안에 여러 속성이 더 추가됨
+- 우린 그 중에서 Share 객체 안에있는 sendDefault 함수 사용할거임
+
+2. 링크 공유하기

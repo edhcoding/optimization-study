@@ -1,7 +1,4 @@
-import classNames from 'classnames/bind'
 import { useEffect, useState } from 'react'
-
-import styles from './App.module.scss'
 
 import FullScreenMessage from '@shared/FullScreenMessage'
 import Heading from '@/components/sections/Heading'
@@ -13,8 +10,7 @@ import Invitation from '@/components/sections/Invitation'
 import Calendar from '@/components/sections/Calendar'
 import Map from '@/components/sections/Map'
 import Contact from '@/components/sections/Contact'
-
-const cx = classNames.bind(styles)
+import Share from '@/components/sections/Share'
 
 function App() {
   const [wedding, setWedding] = useState<Wedding | null>(null)
@@ -70,7 +66,7 @@ function App() {
   } = wedding
 
   return (
-    <div className={cx('container')}>
+    <div>
       <Heading date={date} />
       <Video />
       <Intro
@@ -85,6 +81,7 @@ function App() {
       <Calendar date={date} />
       <Map location={location} />
       <Contact groom={groom} bride={bride} />
+      <Share groomName={groom.name} brideName={bride.name} date={date} />
     </div>
   )
 }
