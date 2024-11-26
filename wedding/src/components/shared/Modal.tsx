@@ -4,6 +4,16 @@ import styles from './Modal.module.scss'
 
 const cx = classNames.bind(styles)
 
+interface ModalProps {
+  open: boolean
+  title?: string
+  body: React.ReactNode
+  rightButtonLabel?: string
+  onRightButtonClick: () => void
+  leftButtonLabel?: string
+  onLeftButtonClick: () => void
+}
+
 export default function Modal({
   open,
   title,
@@ -12,15 +22,7 @@ export default function Modal({
   onRightButtonClick,
   leftButtonLabel = '닫기',
   onLeftButtonClick,
-}: {
-  open: boolean
-  title?: string
-  body: React.ReactNode
-  rightButtonLabel?: string
-  onRightButtonClick?: () => void
-  leftButtonLabel?: string
-  onLeftButtonClick?: () => void
-}) {
+}: ModalProps) {
   if (open === false) return null
 
   return (
@@ -28,7 +30,7 @@ export default function Modal({
       <div className={cx('wrap-modal')}>
         <div className={cx('wrap-body')}>
           <div className={cx('wrap-content')}>
-            {title === null ? null : (
+            {title == null ? null : (
               <div className={cx('txt-title')}>{title}</div>
             )}
             {body}

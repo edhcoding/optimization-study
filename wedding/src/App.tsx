@@ -12,6 +12,7 @@ import Map from '@/components/sections/Map'
 import Contact from '@/components/sections/Contact'
 import Share from '@/components/sections/Share'
 import Modal from '@/components/shared/Modal'
+import AttendCountModal from '@/components/AttendCountModal'
 
 function App() {
   const [wedding, setWedding] = useState<Wedding | null>(null)
@@ -53,7 +54,7 @@ function App() {
     return <FullScreenMessage type="error" />
   }
 
-  if (wedding === null) {
+  if (wedding == null) {
     return null
   }
 
@@ -83,22 +84,7 @@ function App() {
       <Map location={location} />
       <Contact groom={groom} bride={bride} />
       <Share groomName={groom.name} brideName={bride.name} date={date} />
-
-      <Modal
-        open={true}
-        title="테스트"
-        body={
-          <div>
-            <input type="text" />
-          </div>
-        }
-        onLeftButtonClick={() => {
-          console.log('왼쪽 클릭 됨')
-        }}
-        onRightButtonClick={() => {
-          console.log('오른쪽 클릭 됨')
-        }}
-      />
+      <AttendCountModal wedding={wedding} />
     </div>
   )
 }

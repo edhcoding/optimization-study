@@ -81,7 +81,7 @@ function ContactInfo({ name, account, phoneNumber }: Person) {
             </button>
           </CopyToClipboard>
         </li>
-        {account.kakaopayLink !== null ? (
+        {account.kakaopayLink != null ? (
           <li>
             <a
               href={account.kakaopayLink}

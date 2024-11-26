@@ -14,7 +14,7 @@ export default function Section({
 }) {
   return (
     <section className={cx(['container'], className)}>
-      {title !== null ? <div className={cx('txt-title')}>{title}</div> : null}
+      {title != null ? <div className={cx('txt-title')}>{title}</div> : null}
       {children}
     </section>
   )
