@@ -1,0 +1,9 @@
+캘린더 구현은 day-picker 라이브러리를 사용하거임
+
+https://daypicker.dev/ - 공식 사이트
+
+다른 종류의 캘린더 라이브러리
+date-picker
+https://reactdatepicker.com/ - 공식 사이트
+https://github.com/wojtekmaj/react-date-picker - 깃허브
+https://www.npmjs.com/package/react-date-picker - npm
