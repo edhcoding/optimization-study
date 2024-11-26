@@ -1,0 +1,37 @@
+카카오맵 지도 구현
+https://apis.map.kakao.com/web/guide/
+
+1. app-key 발급
+앱 키 => JavaScript 키 복사 (이 키를 어디다가 사용할지 플랫폼을 적어줘야함) => Web 플랫폼 등록(작성한 도메인 주소 말고는 접근 불가능함)
+
+2. .env 파일 생성
+JavaScript 키 붙여넣기 (REACT_APP_KAKAO_APP_KEY) => .gitignore에 추가
+
+3. 컴포넌트 => 섹션 => Map.tsx 생성
+가이드를 보면
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 넣으시면 됩니다."></script>
+이런식으로 script 태그를 사용해야 한다고 함
+
+우린 이 방법말고 비동기로 불러오는 방법을 사용할거임
+주소는 https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_APP_KEY}
+
+뒤에는 autoload=false를 붙여줘야 함
+script 태그를 비동기적으로 호출해서 비동기적으로 가져올건데 언제 가져올지 모름
+그런데 우리는 카카오맵을 그려야하기 때문에 스크립트의 내용을 사용할거임
+그런데 비동기적으로 불러오다 보니까 두개의 싱크가 안맞을 수도 있어서 일단 불러오는 것 까지는 할건데
+그다음 load는 우리가 할거야 라는 뜻임
+결론: 싱크가 안맞는 부분을 우리가 제어 할거니까 자동으로 불러오는 autoload를 끈거임 손대지마!
+
+- 검색 했을때 제일 알기 쉬운 글 -
+script를 동적으로 로드하게 되면 로드가 다 끝나기도 전에 kakao api를 불러오는 코드가 먼저 실행 될 수 있기 때문에
+이 autoload를 false로 만들어 자동으로 로드 되는 것을 꺼준다음, 코드 실행 부분에서 load 메서드를 사용하면 된다.
+
+- 공식 홈페이지 글 -
+autoload=false 인 경우에 라이브러리 로딩 또한 동적으로 로딩됩니다.
+메인이 되는 지도 SDK의 스크립트와 url에 넣은 라이브러리 명에 대응되는 각각의 스크립트들이 엘리먼트에 순차적으로 append 되는 형태로 로딩되며,
+이 모든 스크립트의 로딩이 끝나야만 kakao.maps.load 으로 등록한 콜백을 수행하고 마칩니다.
+
+아래는 동적 로딩을 사용한 지도 예제입니다.
+https://codesandbox.io/s/modest-payne-f5lc7?file=/src/index.js 87
+예제의 콘솔을 보시면 정상적으로 15개의 결과를 가져왔다는 것을 알 수 있습니다.
+
