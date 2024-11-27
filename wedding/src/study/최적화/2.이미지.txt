@@ -1,0 +1,32 @@
+LightHouse (라이트 하우스)
+Lighthouse 는 Google 에서 개발한 웹 페이지의 품질을 평가하기 위한 자동화 도구, 웹 페이지의 문제점을 찾고, 개선 방안을 제안 받을 수 있음
+순서- 성능, 접근성, 권장사항, 검색엔진 최적화, PWA
+
+이미지 최적화하기
+1. 이미지 압축 (Squoosh) - https://squoosh.app/
+- Google 에서 개발한 다양한 형식으로 이미지를 압축해주는 서비스 (길이, 크기 줄여줌)
+squoosh 사용하면 db.json에 이름만 제공하고 확장자 제공 안함
+이게 브라우저 상태에 맞게 api한테 제공을 받으면 좋겠지만 우리는 지금 단순히 업로드 된 이미지들을 가지고와서 사용할 거기 때문에 jpg인지 webp인지 모르는 상태임
+그래서 1차원적으로 풀어볼거임 - 이름만 내려받기(이름 통일 시켜줌, 각자 다른 폴더)
+그다음 copyurl을 복사해서 봐볼거임
+https://res.cloudinary.com/dqhhr8oy9/image/upload/v1732680845/wedding_09_a8yxdj.jpg
+https://res.cloudinary.com/dqhhr8oy9/image/upload/v1732680869/wedding_09_ieobxu.webp
+우리는 이걸
+https://res.cloudinary.com/dqhhr8oy9/image/upload/webp/wedding_09.webp - 이런 형태로 바꿔볼거임 (이름을 똑같이 맞추고 폴더와 포맷 형식을 일치시켜볼거임)
+util 함수를 만들어 볼거임 (generateImageUrl.ts)
+
+2. CDN 서비스 이용하기 (https://cloudinary.com/)
+- Cloudinary는 클라우드 기반의 이미지 및 비디오 관리 서비스 임
+장접: 이미지 크기나 퀄리티 같은 것 들을 URL 만으로 쉽게 조절가능
+ex) 크기 바꾸고 싶으면 url의 upload 뒤쪽에 upload/w_200,h_200/ 이런 식으로 추가하면 됨
+- 이미지가 찌그러지면 ,c_fill 이런 식으로 추가하면 됨
+- 퀄리티는 ,q_auto 이런 식으로 추가하면 됨 (알아서 최적화해서 보여줌)
+- 여기서 더 좋은 최적화를 하고 싶으면 ,q_auto:best 이런 식으로 추가하면 됨
+
+picture 태그 사용 (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
+- picture 태그 사용해서 webp를 지원하지 않는 브라우저도 대응 가능
+예시)
+<picture>
+  <source srcSet={`${src}.webp`} type="image/webp" />
+  <img src={`${src}.jpg`} alt="이미지" />
+</picture>
