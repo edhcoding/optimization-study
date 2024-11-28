@@ -1,0 +1,41 @@
+Firebase
+- 모바일과 웹 애플리케이션 개발을 위한 백엔드 서비스와 도구를 제공해주는 클라우드 기반 플랫폼
+
+Firebase Auth
+- Firebase Auth는 여러가지 인증 방법을 제공해줌 (이메일 로그인, 회원가입, 소셜 로그인 등..)
+- 복잡한 인증 시스템을 처음부터 구축할 필요가 없음
+- Firestore, Storage 같은 다른 firebase 서비스와의 통합에 용이하다
+우리는 Firebase Auth로 인증처리를 해주고 인증을 해서 나온 회원의 정보는 Firestore에 저장할거임
+
+Firebase Store
+- NoSQL 클라우드 데이터베이스 배열, 맵, 중첩된 객체 등 다양한 데이터 타입을 저장하고 관리할 수 있다.
+- 데이터 변경사항을 실시간으로 동기화하여, 사용자들에게 데이터 업데이트를 즉시 보여줄 수 있다. (ex. 채팅 앱)
+- 보안 규칙을 설정하여 특정 조건 아래에서만 데이터 엑세스 할 수 있도록 함
+
+Firebase 설정 (https://firebase.google.com/?hl=ko)
+1. 프로젝트 생성
+
+2. 첫 화면에서 web 선택
+
+3. 웹 앱 이름 입력
+
+4. Firebase SDK 추가
+- yarn add firebase
+- 프로젝트 설정에서 나온 코드 복사
+
+5. src/remote/firebase.ts 파일 생성
+- 여기서 getAnalytics 부분은 빼고 주석 빼고
+- 안에 들어가는 key 값들은 복사해서 env 파일에 넣어줌
+- env 파일에 넣을때 주의할점은 변수명 앞에 REACT_APP_ 를 붙여줘야함
+
+6. 이번에는 Firestore 사용할거임
+- 데이터베이스 만들기 클릭
+- 위치는 asia-northeast3 (Seoul)
+- 테스트 모드 클릭 (나중에는 프로덕션 모드로 바꿔야함)
+- 이제 이거를 다시 firebase.ts에서 설정해줘야함
+
+7. getAuth, getFirestore 함수 사용해서 설정해줌
+- getAuth - 우리가 초기화한 app의 인증 서비스를 가져옴
+- getFirestore - 우리가 초기화한 app의 Firestore 서비스를 가져옴
+
+- 이제 app, auth, store를 밖에서 사용해서 인증 처리나 Firestore 데이터베이스 사용 가능
