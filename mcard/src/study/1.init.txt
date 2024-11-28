@@ -1,0 +1,114 @@
+1. yarn create react-app 프로젝트명 --template typescript
+
+2. node_modules 삭제
+
+3. yarn set version berry
+
+4. .yarnrc.yml 파일 생성 후 추가
+- nodeLinker: pnp
+- enableGlobalCache: false
+
+5. vscode랑 typescript 연결 작업
+- yarn dlx @yarnpkg/sdks vscode
+
+6. cmd + shift + p 후 typescript sdk 버전으로 설정
+
+7. zero install을 해주기위해 .gitignore 파일에 추가
+# yarn zero-install
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+8. App.test.tsx 와 같은 테스트 파일 가보면 오류 발생
+1) yarn remove @testing-library/jest-dom
+2) yarn add -D @types/testing-library__jest-dom @testing-library/jest-dom
+
+9. tsconfig.json 파일에 추가
+- compilerOptions 안에다가 추가
+"types": ["jest", "@testing-library/jest-dom"],
+
+10. eslint, prettier 설정
+- package.json 파일 보면
+"eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+이 부분이 있는데 없애고 파일로 분리할거임
+
+- yarn add -D eslint prettier eslint-plugin-prettier eslint-config-prettier eslint-plugin-react eslint-config-react-app 설치
+!!! yarn add -D eslint@^8.56.0 다운그레이드 해야함
+
+- .eslintrc.json 파일 생성 후 추가
+{
+  "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
+
+- .prettierrc 파일 생성 후 추가
+{
+  "useTabs": false,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "endOfLine": "lf",
+  "semi": false,
+  "arrowParens": "always"
+}
+
+11. 설정한거 다시 vscode에 적용
+- yarn dlx @yarnpkg/sdks vscode
+
+12. 한번에 prettier 적용 시키게 package.json scripts 부분에 명령어 추가
+"lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+"lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+
+13. craco 설정
+- yarn add -D @craco/craco craco-alias
+
+14. tsconfig.paths.json 파일 생성 후 추가
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"]
+    }
+  }
+}
+
+15. craco.config.js 파일 생성 후 추가
+const CracoAlias = require('craco-alias')
+
+module.exports = {
+  plugins: [
+    {
+      plugin: CracoAlias,
+      options: {
+        source: 'tsconfig',
+        tsConfigPath: 'tsconfig.paths.json',
+      },
+    },
+  ],
+}
+
+16. tsconfig.paths.json 파일 수정
+- "extends": "./tsconfig.paths.json", compilerOptions 밖에 추가
+- "include": ["src", "tsconfig.paths.json"] include 부분에 추가
+
+17. package.json안에 scripts에 react-scripts 제거 하고 craco 명령어 추가
+- "start": "craco start",
+- "build": "craco build",
+- "test": "craco test",
+- "eject": "react-scripts eject",
+
+18. yarn start 실행 후 확인
