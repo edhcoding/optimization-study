@@ -12,3 +12,7 @@
 - 에러가 발생한 특정 부분만 격리시키고 나머지 부분은 정상적으로 작동하게 할 수 있음
 
 https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
+
+
+react-error-boundary 라이브러리 사용
+yarn add react-error-boundary
