@@ -1,0 +1,119 @@
+CSS in JS
+- JavaScript 파일 안에서 CSS를 작성하는 방식
+
+장점
+1. 컴포넌트 범위의 스타일을 제공: 충돌 방지
+2. 동적 스타일링: 자바스크립트 변수와 함께 사용하여 스타일을 동적으로 쉽게 변경 가능
+3. 코드 분할: 사용되는 스타일만 번들에 포함
+
+단점
+- 러닝커브, SSR 적용시 추가적인 설정이 필요
+
+Emotion (https://emotion.sh/docs/introduction)
+- yarn add @emotion/react @emotion/styled
+- yarn add -D @emotion/babel-plugin @babel/preset-react
+
+Emotion Babel 설정
+- 우리는 craco를 사용하고 있기 때문에 craco.config.js에 설정을 추가해야 함
+babel: {
+  // babel의 preset 설정 안에 배열안에 배열 형태임 주의!
+    presets: [
+      [
+        // JSX 문법을 해석해주는데 emotion의 jsx를 사용하기 위해서는 이렇게 다시 설정해줘야함
+        // 짧게: emotion의 jsx 문법을 사용하겠다
+        '@babel/preset-react',
+        { runtime: 'automatic', importSource: '@emotion/react' },
+      ],
+      plugins: ['@emotion/babel-plugin'],
+    ],
+  },
+
+emotion의 jsx 문법을 사용하기 때문에 tsconfig에도 설정을 추가해줘야함
+
+Emotion tsconfig 설정
+- compilerOptions 안에 설정 추가
+"jsxImportSource": "@emotion/react"
+
+여기까지 했다면 한 번 껐다키고 이제 jsx 문법 안에서 css를 사용할 수 있음
+
+개발자 도구에서 보면
+여러 문자를 조합해서 컴포넌트의 스코프를 나누게 됨
+그러면 우리는 우선순위를 따로 고려할 필요 없이, 충돌을 고려할 필요없이 쉽게 스타일링 가능함
+
+사용방법
+1. import { css } from '@emotion/react'
+
+const containerStyles = css`
+  background-color: pink;
+`
+
+<div className="App" css={containerStyles}>
+
+2. import styled from '@emotion/styled'
+
+const Button = styled.button`
+  width: 200px;
+  height: 100px;
+`
+<Button>스타일버튼</Button>
+
+3. 변수 사용
+const bold = css`
+  font-weight: bold;
+`
+
+const containerStyles = css`
+  background-color: pink;
+  ${bold}
+`
+
+const Button = styled.button`
+  width: 200px;
+  height: 100px;
+  ${bold}
+`
+
+
+
+import logo from './logo.svg'
+import './App.css'
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
+
+const bold = css`
+  font-weight: bold;
+`
+
+const containerStyles = css`
+  background-color: pink;
+`
+
+const Button = styled.button`
+  width: 200px;
+  height: 100px;
+  ${bold}
+`
+
+function App() {
+  return (
+    <div className="App" css={containerStyles}>
+      <Button>스타일버튼</Button>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  )
+}
+
+export default App
