@@ -46,7 +46,7 @@ export default function AttendCountModal({ wedding }: { wedding: Wedding }) {
         close()
       },
     })
-  }, [])
+  }, [close, haveSeenModal, open, wedding])
 
   return null
 }

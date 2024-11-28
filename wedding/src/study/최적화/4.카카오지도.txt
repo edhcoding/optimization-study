@@ -1,0 +1,48 @@
+캘린더, 카카오지도 불필요한 렌더링 줄이기
+
+react memo
+
+1. React Devtools 에서 컴포넌트 렌더링 확인
+- 어떤 컴포넌트가 제일 오랜시간 렌더링 되고있는지
+- 어떤 컴포넌트가 어떤 상황에서 렌더링 되고있는지
+
+React Devtools 에서 profiler부분이 있는데 이걸 통해서 컴포넌트 렌더링 확인 가능
+- 확인해보니 켈린더는 props로 date 하나만 받는데 리렌더링이 엄청 일어남
+- 이렇때 사용하는데 memo를 사용해서 최적화 가능(memo는 props가 변경되지 않는 이상 컴포넌트를 렌더링 하는것을 막아줌)
+https://react.dev/reference/react/memo
+
+2. 불필요하게 리렌더링 되고있는 요소 찾아보기
+3. Memoization 적용
+4. 무조건 memo를 적용하는게 좋은걸까? 알아보기
+- 크다면 memo를 하는게 좋지만
+- props 중에 자주 변하는 친구가 있다면 사용 안하는게 좋음 (다른 최적화 생각)
+
+
+react useCallback
+
+AttendCountModal 컴포넌트에서
+useEffect를 사용하고 있는데 안에 의존성에 open,close 함수를 넣으면 무한루프가 나옴
+useEffect는 의존성이 변경될때마다 안에있는 콜백함수가 실행되기 때문에 무한루프가 나옴
+
+그래서 의존성에 있는 open을 한 번 들여다 봤을때
+ModalContext에 있는 open을 보면 어떤 값을 받아서 상태 값을 없데이트 하고 있음 그러면서 다시 ModalContext가 렌더링이 될거고
+ModalContext로 감싸져 있는 app 컴포넌트가 리렌더링이 될거고
+그러면서 하위 자식들이 모두 리렌더링이 될거고 그러면서 AttendCountModal이 리렌더링이 될건데
+그러면서 다시 useEffect의 의존성에 있는 open이라고 하는얘도 ModalContext에 의해 다시 새로 그려지면서 open이라는 함수가 다시 새롭게 만들어 질거고
+그러면서 useEffect 입장에서는 open도 새로운 친구라고 생각하면서 계속 리렌더링, 무한루프가 발생하는거임
+
+왜냐하면 open이 리렌더링 될 때마다 새로워지기 때문임 그래서 무한루프가 발생하는거임
+
+그래서 이걸 봤을때 우리는 open이라는 친구를 새로운 친구라고 생각하지 않고 원래 있던 친구처럼 새롭지 않다라고 바꿔줘야한다는 생각을 할 수 있음
+
+useCallback을 사용해볼거임
+- useCallback은 함수 정의를 캐시하는 React Hook으로 리렌더링시 새로운 함수를 다시 만들지 않음
+
+사용방법 (https://react.dev/reference/react/useCallback)
+- useCallback은 첫번째 인자로 콜백함수를 받고 두번째 인자로 의존성 배열을 받음 (useEffect와 동일)
+
+그래서 open, close를 useCallback으로 바꿔볼거임 - 이제 한 번 생성되면 다시 생성안됌
+이제 open, close 변수를 values에 객체안에 넣어져 있는데 이 값도 다시 생성되지 않도록
+useMemo를 사용해서 최적화 해볼거임 (https://react.dev/reference/react/useMemo)
+- useMemo는 첫번째 인자로 콜백함수를 받고 두번째 인자로 의존성 배열을 받음
+- useMemo는 값을 캐시하는 Hook으로 리렌더링시 새로운 값을 다시 만들지 않음

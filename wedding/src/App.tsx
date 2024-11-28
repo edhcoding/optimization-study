@@ -17,6 +17,7 @@ function App() {
   const [wedding, setWedding] = useState<Wedding | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
+  const [count, setCount] = useState<number>(0)
 
   // wedding 데이터 호출
   useEffect(() => {
@@ -68,6 +69,13 @@ function App() {
 
   return (
     <div>
+      <button
+        type="button"
+        style={{ position: 'fixed', top: 0, fontSize: '40px' }}
+        onClick={() => setCount((prev) => prev + 1)}
+      >
+        + {count}
+      </button>
       <Heading date={date} />
       <Video />
       <Intro

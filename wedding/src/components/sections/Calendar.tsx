@@ -6,6 +6,7 @@ import { ko } from 'date-fns/locale'
 
 import 'react-day-picker/style.css'
 import { DayPicker } from 'react-day-picker'
+import { memo } from 'react'
 
 const cx = classNames.bind(styles)
 
@@ -35,7 +36,7 @@ const css = `
   }
 `
 
-export default function Calendar({ date }: { date: string }) {
+function Calendar({ date }: { date: string }) {
   const weddingDate = parseISO(date)
 
   return (
@@ -66,3 +67,5 @@ export default function Calendar({ date }: { date: string }) {
     </Section>
   )
 }
+
+export default memo(Calendar)
