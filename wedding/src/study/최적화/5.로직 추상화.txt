@@ -26,3 +26,35 @@ ex) const { data, isLoading, error} = useFetchTodos();
 단순히 우리는 useFetchTodos라는 함수를 사용할거고 이 함수에서 반환되는 값들을 사용하는거임 - 이렇게 내부의 로직과 복잡성을 감추는것 그리고 사용자한테는 명확한 인터페이스를 제공하는것이 추상화임
 
 2. 선언적으로 코딩하기
+
+1) 선언적인 코드는 무엇을 뜻할까?
+- 제 생각으로는 동작이 예상가능한 추상화된 코드
+ex) <InView onChange={()=>{ // }}>화면에 걸렸을 때 실행</InView>
+예시 코드를 보면 화면에 걸렸을 때 onChange 함수가 실행되는 코드를 작성하고 있다라고 어느정도 예상이 가는 추상화된 코드를 선언적인 코드라고 생각함
+
+만약에 이 코드가 추상화 되어 있지 않다면 IntersectionObserver를 밖에 나와서 여러 코드들이 감춰지지 않고 직접 사용하고 있었을거임
+하지만 InView라는 컴포넌트는 이런 내부 동작들을 숨키고 사용자에게 정확한 인터페이스를 제공해주는 형태를 가지고 있어서 InView라는 컴포넌트는 잘 추상화된 코드라고 생각함
+
+2) React Suspense를 이용해서 선언적으로 loading 처리하기
+그럼 우리는 React의 Suspense를 이용해서 선언적으로 loading 처리를 해볼거임
+https://react.dev/reference/react/Suspense
+
+Suspense라고 하는 React Hook은 자식 요소가 아직 로드중이거나 아니면 자식요소에서 에러를 던지는 경우에 대비해서 대체 UI를 보여주는 역할을 함
+Suspense라는 뜻이 아직 완성되지 않은, 미완성인 상태를 뜻 함 - 이름으로도 어느정도 동작이 유추가능함
+내부 자식이 아직 뭔가 완성되지 않았고 로드되지 않았다면 이 fallback 요소를 그려줘라! 라고 하고 있어서 데이터를 불러오기전에 로딩 화면을 보여줘서 보다 선언적으로 로딩을 하는 방법을 알아보자!
+
+useSuspenseQuery랑 같이사용
+
+3) React Query를 사용해서 서버 상태 관리하기
+React Query란?
+- 서버 상태를 관리하는 라이브러리임
+- 선언적으로 에러, 로딩등을 관리할 수 있음
+- 캐싱, 값 업데이트등 비동기 과정을 보다 더 편하게 처리할 수 있음
+
+https://tanstack.com/
+
+설치 방법
+yarn add @tanstack/react-query
+yarn add @tanstack/react-query-devtools
+
+이제 data fetching 해주는 useWedding에 적용시켜보자

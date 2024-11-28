@@ -12,11 +12,7 @@ import AttendCountModal from '@/components/AttendCountModal'
 import useWedding from '@/hooks/useWedding'
 
 function App() {
-  const { wedding, loading, error } = useWedding()
-
-  if (loading) {
-    return <FullScreenMessage type="loading" />
-  }
+  const { wedding, error } = useWedding()
 
   if (error) {
     return <FullScreenMessage type="error" />
