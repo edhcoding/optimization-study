@@ -1,4 +1,3 @@
-import FullScreenMessage from '@shared/FullScreenMessage'
 import Heading from '@/components/sections/Heading'
 import Video from '@/components/sections/Video'
 import ImageGallery from '@/components/sections/ImageGallery'
@@ -12,11 +11,7 @@ import AttendCountModal from '@/components/AttendCountModal'
 import useWedding from '@/hooks/useWedding'
 
 function App() {
-  const { wedding, error } = useWedding()
-
-  if (error) {
-    return <FullScreenMessage type="error" />
-  }
+  const { wedding } = useWedding()
 
   if (wedding == null) {
     return null
