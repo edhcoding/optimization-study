@@ -7,6 +7,12 @@ import { css } from '@emotion/react'
 // root style을 지정해줘야 하기 때문에 colorPalette도 가져와야함
 export default css`
   ${colorPalette}
+
+  :root {
+    --dimmed-zindex: 10;
+    --alert-zindex: 11;
+  }
+
   html,
   body,
   div,

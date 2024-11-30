@@ -1,5 +1,7 @@
 import Button from '@/components/shared/Button'
+import Input from '@/components/shared/Input'
 import Text from '@/components/shared/Text'
+import TextFiled from '@/components/shared/TextFiled'
 import './App.css'
 
 function App() {
@@ -19,6 +21,15 @@ function App() {
       <Button>클릭해주세요</Button>
       <Button>클릭해주세요</Button>
       <Button>클릭해주세요</Button>
+      <Input placeholder="로그인" aria-invalid={true} />
+      <Input placeholder="로그인" aria-invalid={false} />
+
+      <TextFiled label="아이디" />
+      <TextFiled
+        label="비밀번호"
+        hasError
+        helpMessage="비밀번호는 영문 대소문자와 숫자 조합으로 8자 이상 입력해주세요."
+      />
     </div>
   )
 }
