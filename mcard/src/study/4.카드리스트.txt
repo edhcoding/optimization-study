@@ -1,0 +1,27 @@
+카드 리스트 구현
+- mock/data.js 파일을 생성하고 데이터 추가
+- 이 데이터를 firebase 연동 후 firebase에 데이터를 저장해볼거임
+
+테스트 페이지를 따로 구성한 다음 버튼을 하나 추가하고 버튼을 누르면 mock 데이터들을 가지고와서 firebase에 저장하는 작업을 해볼거임
+- yarn add react-router-dom 으로 페이지를 나눌거임
+- App.tsx에서 페이지 나누기
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<HomePage />} /> => react-router-dom업데이트 돼서 Component 말고 element 사용, exact 속성 사라지고 /* 추가
+    <Route path="/test" element={<TestPage />} />
+  </Routes>
+</BrowserRouter>
+
+test 페이지에서 버튼을 누르면 데이터를 가지고와서 firebase에 저장하는 작업 진행
+- 카드 리스트 추가하기 버튼을 만들건데 이거를 누르면 firebase로 mockdata를 저장하는 작업을 진행해야함
+- components/test/CardListAddButton.tsx 파일 생성
+이렇게 컴포넌트를 분리하는 이유가 카드 리스트를 추가하려면 액션이나 여러 서버와 통신하는 작업들이 들어가는데 testpage 안에서 하면 페이지가 여러개의 관심사를 가지게 되니까 분리해줘야함
+
+firestore database는 컬렉션이라는 단위로 데이터를 관리함
+ex) 배너 컬렉션, 카드 컬렉션 등 큼지막하게 데이터를 관리함
+- 이 아래 하나 하나 데이터가 쌓이는 것을 문서라고 함
+
+mockdata를 하나씩 저장해주면 성능에 안좋은데 firestore에서 writeBatch라는 함수를 사용해서 한번에 여러개의 데이터를 저장할 수 있음
+
+data.js에 banner 데이터를 추가해볼거임
+- id값을 link에 연결해줘서 배너 클릭하면 상세 페이지 가도록 해볼거임

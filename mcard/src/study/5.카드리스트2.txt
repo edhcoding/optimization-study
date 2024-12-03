@@ -1,0 +1,26 @@
+tanstack query로 카드 리스트 구현
+- yarn add @tanstack/react-query
+
+banner를 swiper로 구현할거임
+https://swiperjs.com/react
+swiper 9버전으로 설치
+- yarn add swiper@9
+
+컴포넌트 합성
+- props drilling 방지
+- 각각 필요한 컴포넌트들로 쪼개서 합성
+- 예를들어 20개의 props 들을 여러개의 컴포넌트로 쪼개서 합성하면 코드 가독성이 좋아짐, props 받는 양도 줄어듬
+- ListRow 컴포넌트 참고
+
+무한 스크롤을 구현하는데
+- data안에 있는 page에는 [[], [] , []] 이런식으로 데이터들이 들어올건데 이걸 flat 하게 합쳐줘야함
+- 이런 작업을 해주는 라이브러리가 있음 (lodash의 flatten 함수 이용)
+- yarn add lodash @types/lodash
+- yarn add react-infinite-scroll-component
+
+react-infinite-scroll-component
+- InfiniteScroll 컴포넌트 사용
+- 무한 스크롤 구현 시 주의할 점
+  - 무한 스크롤 구현 시 최초 렌더링 시 데이터가 없어서 빈 화면이 보임
+  - 이를 방지하기 위해서는 최초 렌더링 시 빈 화면을 보여주고 데이터가 있을 때 무한 스크롤이 동작하도록 해야함
+  - 이를 위해서는 hasMore 값을 false로 설정하고 데이터가 있을 때 true로 변경하면 됨

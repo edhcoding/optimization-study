@@ -161,7 +161,7 @@ export default css`
   }
 
   a {
-    text-decoration: none;
-    color: var(--black);
+    text-decoration: inherit;
+    color: inherit;
   }
 `
