@@ -1,9 +1,11 @@
+import Badge from '@/components/shared/Badge'
 import ListRow from '@/components/shared/ListRow'
 import { getCards } from '@/remote/card'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useNavigate } from 'react-router-dom'
 
 export default function CardList() {
   const { data, hasNextPage, fetchNextPage, isFetching } =
@@ -15,6 +17,8 @@ export default function CardList() {
       // snapshot.lastVisible 하니까 위에 pageParam에 마지막 커서요소가 들어감 => getCards(pageParam) 넣어주면 그다음 값이 들어가는 과정임
       getNextPageParam: (snapshot) => snapshot.lastVisible,
     })
+
+  const navigate = useNavigate()
 
   // fetch 중이거나 다음 페이지를 부를 수 없을때 아무런 일도 하지 않게 할거임
   const loadMore = useCallback(() => {
@@ -37,25 +41,32 @@ export default function CardList() {
       dataLength는 데이터의 총 개수를 의미함
       hasMore는 다음 페이지를 부를 수 있는지 여부
       loader는 로딩중에 보여줄 컴포넌트
-      next는 fetch 함수를 호출하는 함수를 넣어줌 (우린 바로 쓰기 보다는 loadMore 함수 사용) */}
+      next는 fetch 함수를 호출하는 함수를 넣어줌 (우린 바로 쓰기 보다는 loadMore 함수 사용)
+      scrollThreshold는 스크롤이 얼마나 되었을 때 다음 페이지를 불러올지에 대한 임계치를 설정해줌 (0.5는 50% 스크롤 되었을 때 다음 페이지를 불러옴) */}
       <InfiniteScroll
         dataLength={cards.length}
         hasMore={hasNextPage}
         loader={<div>Loading...</div>}
         next={loadMore}
+        scrollThreshold={'100px'}
       >
-        {cards.map((card, i) => {
-          return (
-            <ListRow
-              key={card.id}
-              contents={
-                <ListRow.Texts title={`${i + 1}위`} subTitle={card.name} />
-              }
-              right={card.payback != null ? <div>{card.payback}%</div> : null}
-              withArrow
-            />
-          )
-        })}
+        <ul>
+          {cards.map((card, i) => {
+            return (
+              <ListRow
+                key={card.id}
+                contents={
+                  <ListRow.Texts title={`${i + 1}위`} subTitle={card.name} />
+                }
+                right={
+                  card.payback != null ? <Badge label={card.payback} /> : null
+                }
+                withArrow
+                onClick={() => navigate(`/card/${card.id}`)}
+              />
+            )
+          })}
+        </ul>
       </InfiniteScroll>
     </div>
   )

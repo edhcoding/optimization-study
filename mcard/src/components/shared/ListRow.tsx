@@ -8,6 +8,7 @@ interface ListRowProps {
   right?: React.ReactNode
   withArrow?: boolean
   onClick?: () => void
+  as?: 'div' | 'li'
 }
 
 // ListRow 컴포넌트는 틀을 담당하고 왼쪽, 가운데, 오른쪽, 화살표 이렇게 구멍을 뚫어줄거임
@@ -17,10 +18,11 @@ export default function ListRow({
   right,
   withArrow = false,
   onClick,
+  as = 'li',
 }: ListRowProps) {
   // Flex에 우리는 list를 만들거기 때문에 li로 표현하기 위해서 as="li"를 써줌
   return (
-    <Flex as="li" css={listRowContainerStyles} onClick={onClick} align="center">
+    <Flex as={as} css={listRowContainerStyles} onClick={onClick} align="center">
       <Flex css={listRowLeftStyles}>{left}</Flex>
       <Flex css={listRowContentsStyles}>{contents}</Flex>
       <Flex>{right}</Flex>

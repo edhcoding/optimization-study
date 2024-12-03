@@ -11,6 +11,7 @@ export default function HomePage() {
       />
       <AdBanners />
       <CardList />
+      <div style={{ height: 100, opacity: 0 }} />
     </div>
   )
 }

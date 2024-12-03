@@ -1,0 +1,12 @@
+상세페이지 애니메이션 적용
+- opacity 0 => 1
+- 서로 다른 딜레이
+- 버튼도 아래에서 위로 올라가게
+transform : translateY(100%) => 0으로 해줘야 아래에서 위로 올라감
+
+1. 기본 css와 keyframe을 사용할건데
+keyframe과 emotion을 어떻게 같이 사용하는지 알아야함
+emotion 에서도 keyframes를 지원함
+
+2. framer-motion 사용
+- yarn add motion (업데이트 됨)
