@@ -7,17 +7,28 @@ import { createPortal } from 'react-dom'
 interface FixedButtonProps {
   label: string
   onClick: () => void
+  disabled?: boolean
 }
 
 // FixedButton 컴포넌트는 portal 을 사용해서 렌더링 할거임
-export default function FixedButton({ label, onClick }: FixedButtonProps) {
+export default function FixedButton({
+  label,
+  onClick,
+  disabled,
+}: FixedButtonProps) {
   const $portalRoot = document.getElementById('root-portal')
 
   if ($portalRoot == null) return null
 
   return createPortal(
     <Container>
-      <Button size="medium" full onClick={onClick} css={buttonStyles}>
+      <Button
+        size="medium"
+        full
+        onClick={onClick}
+        css={buttonStyles}
+        disabled={disabled}
+      >
         {label}
       </Button>
     </Container>,
