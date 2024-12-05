@@ -5,12 +5,13 @@ import { auth } from '@/remote/firebase'
 import { FirebaseError } from 'firebase/app'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function SigninPage() {
   const { open } = useAlertContext()
 
   const navigate = useNavigate()
+  const { state } = useLocation()
 
   const handleSubmit = useCallback(
     async (formValues: FormValues) => {
@@ -22,7 +23,11 @@ export default function SigninPage() {
         await signInWithEmailAndPassword(auth, email, password)
 
         // 로그인 유저 정보 저장은 AuthGuard 컴포넌트에서 처리하기 때문에 여기서는 로그인 되면 리다이렉트 시키겠음
-        navigate('/')
+        if (state?.redirectUrl) {
+          navigate(state.redirectUrl)
+        } else {
+          navigate('/')
+        }
       } catch (e) {
         // firebase 에러 처리
         if (e instanceof FirebaseError) {

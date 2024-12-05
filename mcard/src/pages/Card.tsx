@@ -6,11 +6,19 @@ import Top from '@/components/shared/Top'
 import { getCard } from '@/remote/card'
 import { css } from '@emotion/react'
 import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'motion/react'
+import { useCallback } from 'react'
+import useUser from '@/hooks/auth/useUser'
+import { useAlertContext } from '@/contexts/AlertContext'
 
 export default function CardPage() {
   const { id = '' } = useParams()
+
+  const user = useUser()
+  const { open } = useAlertContext()
+
+  const navigate = useNavigate()
 
   const { data } = useQuery({
     queryKey: ['card', id],
@@ -18,6 +26,26 @@ export default function CardPage() {
     // enabled는 쿼리 실행 여부 => id가 빈 값이 아니면 호출하겠다! 라는 뜻
     enabled: id !== '',
   })
+
+  const moveToApply = useCallback(() => {
+    // 나중에 추가하면 좋은기능
+    // 로그인 후 원래 페이지로 돌아오기
+
+    if (user == null) {
+      open({
+        title: '로그인이 필요한 기능입니다.',
+        onButtonClick: () =>
+          navigate(`/signin`, {
+            state: {
+              redirectUrl: `/card/${id}`,
+            },
+          }),
+      })
+      return
+    }
+
+    navigate(`/apply/${id}`)
+  }, [id, navigate, open, user])
 
   if (data == null) return null
 
@@ -65,7 +93,7 @@ export default function CardPage() {
         </Flex>
       ) : null}
 
-      <FixedButton label="신청하기" onClick={() => {}} />
+      <FixedButton label="신청하기" onClick={moveToApply} />
     </div>
   )
 }

@@ -36,8 +36,6 @@ export default function Navbar() {
     return null
   }, [handleSignOut, showSignButton, user])
 
-  console.log('user', user)
-
   return (
     <Flex justify="space-between" align="center" css={navbarContainerStyle}>
       <Link to="/">홈</Link>

@@ -1,5 +1,7 @@
+import PrivateRoute from '@/components/auth/PrivateRoute'
 import Navbar from '@/components/shared/Navbar'
 import ScrollToTop from '@/components/shared/ScrollToTop'
+import ApplyPage from '@/pages/Apply'
 import CardPage from '@/pages/Card'
 import HomePage from '@/pages/Home'
 import SigninPage from '@/pages/Signin'
@@ -16,6 +18,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/card/:id" element={<CardPage />} />
+        <Route
+          path="/apply/:id"
+          element={
+            <PrivateRoute>
+              <ApplyPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/signup" element={<SignupPage2 />} />
         <Route path="/signin" element={<SigninPage />} />
       </Routes>
