@@ -4,8 +4,11 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth, store } from '@/remote/firebase'
 import { collection, doc, setDoc } from 'firebase/firestore'
 import { COLLECTIONS } from '@/constants'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignupPage2() {
+  const navigate = useNavigate()
+
   // Form.tsx에서 폼이 관리하는 역할, 코드들이 너무 많아서 회원가입 로직은 상위 컴포넌트에서 관리
   // handleSubmit 함수만 만들어서 Form 한테 회원가입할 준비가 되면 값만 보내줘! 하면 됨
   const handleSubmit = async (formValues: FormValues) => {
@@ -28,6 +31,8 @@ export default function SignupPage2() {
     // 이번에는 문서의 id를 지정해줄거임 => 나중에 사용할때 손쉽게 빼올 수 있음
     // 컬렉션의 uid가 문서의 id가 됨
     await setDoc(doc(collection(store, COLLECTIONS.USER), user.uid), newUser)
+
+    navigate('/')
   }
 
   return (
