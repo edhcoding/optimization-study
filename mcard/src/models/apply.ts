@@ -23,8 +23,11 @@ export interface ApplyValues {
   salary: string
   creditScore: string
   payDate: string
+  // 마스터 카드
   isMaster: boolean
+  // 하이패스 카드
   isHipass: boolean
+  // 후불 교통기능
   isRf: boolean
   status: keyof typeof APPLY_STATUS
   step: number
