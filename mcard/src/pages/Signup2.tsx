@@ -21,7 +21,7 @@ export default function SignupPage2() {
     })
 
     // 데이베이스에 저장할 유저 정보
-    const newUser = {
+    const addNewUser = {
       uid: user.uid,
       email: user.email,
       displayName: name,
@@ -30,7 +30,7 @@ export default function SignupPage2() {
     // doc(collection(store, COLLECTIONS.USER)) 카드 추가할때 처럼 이렇게만 하면 저장할때 firebase에서 임의의 id를 생성해서 저장함
     // 이번에는 문서의 id를 지정해줄거임 => 나중에 사용할때 손쉽게 빼올 수 있음
     // 컬렉션의 uid가 문서의 id가 됨
-    await setDoc(doc(collection(store, COLLECTIONS.USER), user.uid), newUser)
+    await setDoc(doc(collection(store, COLLECTIONS.USER), user.uid), addNewUser)
 
     navigate('/')
   }
