@@ -9,6 +9,7 @@ import SigninPage from '@/pages/Signin'
 import SignupPage2 from '@/pages/Signup2'
 import TestPage from '@/pages/Test'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Suspense } from 'react'
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
           path="/apply/:id"
           element={
             <PrivateRoute>
-              <ApplyPage />
+              <Suspense fallback={<div>Loading...</div>}>
+                <ApplyPage />
+              </Suspense>
             </PrivateRoute>
           }
         />
