@@ -33,3 +33,10 @@ Elements 탭에서 보면 페이지 전화하면 div안에 있는 내용만 바�
 트리쉐이킹이란? - 사용하지 않는 불필요한 코드와 변수들을 제거해서 bundle.js 파일의 사이즈 즉, 크기를 줄이는 작업
 
 번들사이즈를 줄였을때 우리가 얻을 수 있는 효과는 무엇일까?
+https://edongdong.tistory.com/191 - 블로그에 글 올림
+
+webpack-bundle-analyzer 라이브러리를 이용해서 webpack의 번들링된 결과물이 어떤 것들을 가지고있고 어떤 라이브러리가 어느정도의 용량을 가지고있는지와 같은 것들을 살펴볼 수 있게 도와줌
+https://www.npmjs.com/package/webpack-bundle-analyzer - 번들 사이즈 분석 도구
+
+라이브러리를 사용하기 전에 하나 더 알고 넘어가야할 게 있음
+파일시스템에는 CJS(CommonJS)와 ESM(Ecma Script Module) 두 가지 방식이 있음
