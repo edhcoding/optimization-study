@@ -21,9 +21,7 @@ function Alert({
   buttonLabel = '확인',
   onButtonClick,
 }: AlertProps) {
-  if (open === false) {
-    return null
-  }
+  if (open === false) return null
 
   return (
     <Dimmed>

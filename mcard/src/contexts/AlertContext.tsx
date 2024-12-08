@@ -10,9 +10,10 @@ import {
 import { createPortal } from 'react-dom'
 
 // ComponentProps는 컴포넌트의 props를 추출해주는 타입
-// ComponentProps는 interface에서는 사용불가 type으로만 사용가능
+// ComponentProps는 interface에서는 사용불가 type으로만 사용가능 (open, title, description, buttonLabel = '확인', onButtonClick)
 type AlertProps = ComponentProps<typeof Alert>
 
+// Omit은 특정 키를 제외한 타입을 만들어주는 타입 (title, description, buttonLabel = '확인', onButtonClick)
 type AlertOptions = Omit<AlertProps, 'open'>
 
 // Alert를 확인용으로만 만들거라서 확인 버튼을 클릭할 수 있게 할거라서 close는 필요없음
