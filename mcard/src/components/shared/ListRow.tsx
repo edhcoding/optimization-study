@@ -1,4 +1,6 @@
 import Flex from '@/components/shared/Flex'
+import Skeleton from '@/components/shared/Skeleton'
+import Spacing from '@/components/shared/Spacing'
 import Text from '@/components/shared/Text'
 import { css } from '@emotion/react'
 
@@ -50,13 +52,33 @@ function ListRowTexts({
   title,
   subTitle,
 }: {
-  title: string
-  subTitle: string
+  title: React.ReactNode
+  subTitle: React.ReactNode
 }) {
   return (
     <Flex direction="column">
       <Text bold>{title}</Text>
       <Text typography="t7">{subTitle}</Text>
+    </Flex>
+  )
+}
+
+function ListRowSkeleton() {
+  return (
+    <Flex as="li" css={listRowContainerStyles} align="center">
+      <Flex css={listRowLeftStyles}></Flex>
+      <Flex css={listRowContentsStyles}>
+        <ListRow.Texts
+          title={
+            <>
+              <Skeleton width={67} height={23} />
+              <Spacing size={2} />
+            </>
+          }
+          subTitle={<Skeleton width={85} height={20} />}
+        />
+      </Flex>
+      <IconArrowRight />
     </Flex>
   )
 }
@@ -78,3 +100,4 @@ function IconArrowRight() {
 // 함수도 객체이기 때문에 함수에 속성을 추가할 수 있음
 // 이런식으로 키와 밸류를 이용해서 속성을 추가할 수 있음
 ListRow.Texts = ListRowTexts
+ListRow.Skeleton = ListRowSkeleton

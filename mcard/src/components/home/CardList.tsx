@@ -1,7 +1,7 @@
 import Badge from '@/components/shared/Badge'
 import ListRow from '@/components/shared/ListRow'
 import { getCards } from '@/remote/card'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import flatten from 'lodash.flatten'
 import { useCallback } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function CardList() {
   const { data, hasNextPage, fetchNextPage, isFetching } =
-    useInfiniteQuery<any>({
+    useSuspenseInfiniteQuery<any>({
       queryKey: ['cards'],
       queryFn: ({ pageParam }) => getCards(pageParam as any),
       initialPageParam: undefined,
@@ -46,7 +46,7 @@ export default function CardList() {
       <InfiniteScroll
         dataLength={cards.length}
         hasMore={hasNextPage}
-        loader={<div>Loading...</div>}
+        loader={<ListRow.Skeleton />}
         next={loadMore}
         scrollThreshold={'100px'}
       >
