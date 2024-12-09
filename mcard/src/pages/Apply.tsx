@@ -10,6 +10,12 @@ import { updateApplyCard } from '@/remote/apply'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+const STATUS_MESSAGE = {
+  [APPLY_STATUS.READY]: '카드 심사를 준비하고 있습니다.',
+  [APPLY_STATUS.PROGRESS]: '카드 심사중입니다. 잠시만 기다려주세요.',
+  [APPLY_STATUS.COMPLETE]: '카드 신청이 완료되었습니다.',
+}
+
 // 카드 신청 제출 로직
 // 이 함수를 바로 ApplyPage에서 사용해도 괜찮지만 커스텀 훅을 활용해서 렌더링 하는 곳 과 실제 비즈니스 로직을 처리하는 곳을 분리해서 사용해볼거임
 export default function ApplyPage() {
@@ -67,7 +73,7 @@ export default function ApplyPage() {
   // 2. Apply 컴포넌트는 순수하게 UI 렌더링과 폼 제출만 담당하게 됩니다.
   // 3. usePollApplyStatus는 폴링 로직만 담당하고 실제 처리는 페이지에서 하므로 관심사가 잘 분리됩니다.
 
-  usePollApplyStatus({
+  const { data: status } = usePollApplyStatus({
     enabled: readyToPoll,
     onSuccess: async (data) => {
       if (data === APPLY_STATUS.COMPLETE) {
@@ -122,7 +128,7 @@ export default function ApplyPage() {
 
   if (readyToPoll || isPending) {
     // isLoading 이 isPending 이라는 이름으로 사용됨
-    return <FullPageLoader message="카드를 신청중입니다." />
+    return <FullPageLoader message={STATUS_MESSAGE[status ?? 'READY']} />
   }
 
   return <Apply onSubmit={mutate} />
