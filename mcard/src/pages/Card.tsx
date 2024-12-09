@@ -11,6 +11,8 @@ import { motion } from 'motion/react'
 import { useCallback } from 'react'
 import useUser from '@/hooks/auth/useUser'
 import { useAlertContext } from '@/contexts/AlertContext'
+import Review from '@/components/card/Review'
+import Spacing from '@/components/shared/Spacing'
 
 export default function CardPage() {
   const { id = '' } = useParams()
@@ -92,6 +94,12 @@ export default function CardPage() {
           <Text typography="t7">{removeHtmlTags(promotion.terms)}</Text>
         </Flex>
       ) : null}
+
+      <Spacing size={1000} />
+
+      <Review />
+
+      <Spacing size={100} />
 
       <FixedButton label="1분만에 신청하고 혜택받기" onClick={moveToApply} />
     </div>

@@ -1,0 +1,162 @@
+이전 글을 읽고 온 사람은 카드 상세페이지에서 카드를 신청하는 과정에 대해서 보았을거다
+
+
+
+그런데 만약에 카드 상세페이지에 기능을 여러개 추가하게되었다라고 가정해보자 (리뷰, 추천 카드, 카드 이미지 등등..)
+
+
+
+그러면 유저가 해당 페이지에 진입했을 때 우리는 카드 상세 페이지를 보여주기 위해서 혜택에 대한 정보, 리뷰, 추천 카드 그리고 이미지 갤러리를 구성하기 위해서 이미지를 다운 받아야 합니다.
+
+이렇게 동시다발적으로 네트워크 요청이 일어나고 그만큼 페이지의 로딩 속도가 느려진다는 말과 같습니다.
+
+
+
+유저가 처음 진입했을때 첫 번째로 보는 부분은 혜택 부분입니다.
+
+
+
+
+그리고 예를 들어 브라우저 뷰포트도 혜택 컴포넌트에서 걸려있다고 가정해보자
+
+그러면 우리가 정해야 할 우선순위에 첫 번째는 혜택 컴포넌트인거는 당연하다
+
+그런데 지금 다른 기능들을 추가했을때 다른 기능 컴포넌트에서도 네트워크 요청이 일어나고 있다고 생각해봅시다.
+
+그래서 혜택 컴포넌트가 네트워크 요청에 밀려서 나중에 보여줘도 될 요청들에 밀려서 더 늦게 요청이 갈 수도 있습니다.
+
+
+
+지금부터 해볼거는 컴포넌트별 우선순위를 정해서 네트워크 요청을 해보겠습니다.
+
+우선순위를 정해보자
+
+1. 혜택 컴포넌트
+
+2. 리뷰 컴포넌트
+
+3. 추천카드
+
+4. 카드 이미지
+
+
+
+우리 화면에 보이는 요소만 네트워크 요청이 가도록 해볼거임
+
+이때 필요한거는 무한 스크롤 구현할때도 사용했지만 Intersection Observer API가 필요합니다.
+
+이렇게 화면에 노출될때마다 컴포넌트 요청이 가도록 구현해보겠습니다.
+
+
+
+쉽게 react-intersection-observer 라이브러리를 사용해보자
+
+https://www.npmjs.com/package/react-intersection-observer
+
+
+react-intersection-observer
+
+Monitor if a component is inside the viewport, using IntersectionObserver API. Latest version: 9.13.1, last published: 3 months ago. Start using react-intersection-observer in your project by running `npm i react-intersection-observer`. There are 1169 othe
+
+www.npmjs.com
+yarn add react-intersection-observer
+
+
+일부러 간단하게 Review 컴포넌트를 만들고 혜택 컴포넌트와 거리를 많이 벌려서 아래로 스크롤 해야 보이게 까지 구현했다
+
+
+현재코드
+
+import Skeleton from '@shared/Skeleton'
+import Spacing from '@shared/Spacing'
+import { useQuery } from '@tanstack/react-query'
+
+export default function Review() {
+  // 네트워크 요청하는 것 처럼 흉내 내볼거임
+  const { data = [], isLoading } = useQuery({
+    queryKey: ['review'],
+    queryFn: () => {
+      return new Promise<string[]>((resolve) => {
+        setTimeout(() => {
+          // 리뷰에 대한 결과값
+          resolve(['너무 좋아요', '꼭 신청하세요 !!'])
+        }, 2_000)
+      })
+    },
+  })
+
+  return (
+    <div>
+      {isLoading ? (
+        <>
+          <Skeleton width={30} height={10} />
+          <Spacing size={3} />
+          <Skeleton width={30} height={10} />
+        </>
+      ) : (
+        data.map((review) => <div>{review}</div>)
+      )}
+    </div>
+  )
+}
+
+
+react-intersection-observer 적용
+
+useInview를 가지고 와서 ref, inView 값을 빼오고 ref를 우리가 보여지고 싶은거를 캐치하고 싶은곳에 ref 속성에 넣고
+
+화면에 ref속성이 있는 div가 보여지면 inView가 true로 바뀌고 화면에서 안보이면 false가 됨
+
+
+
+우리는 이걸 보고 생각이 드는게
+
+inView가 true일 때 네트워크 요청을 하면 되겠다! 라고 생각할 수 있어야 합니다.
+
+그래서 우리는 useQuery의 속성중에 enabled에 inview를 넣으면 inView가 true일때만 useQuery가 작동하도록 할 수 있습니다.
+
+
+
+그런데 inVIew값이 화면에 따라서 true <=> false로 계속 변경되기 때문에 useInview안에 triiggerOnce를 true로 넣어줍니다. 그러면 inView가 매번 바뀌지 않습니다.
+
+
+
+import { useInView } from 'react-intersection-observer'
+
+import Skeleton from '@shared/Skeleton'
+import Spacing from '@shared/Spacing'
+import { useQuery } from '@tanstack/react-query'
+
+export default function Review() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  })
+
+  // 네트워크 요청하는 것 처럼 흉내 내볼거임
+  const { data = [], isLoading } = useQuery({
+    queryKey: ['review'],
+    queryFn: () => {
+      return new Promise<string[]>((resolve) => {
+        setTimeout(() => {
+          // 리뷰에 대한 결과값
+          resolve(['너무 좋아요', '꼭 신청하세요 !!'])
+        }, 2_000)
+      })
+    },
+    enabled: inView,
+  })
+
+  return (
+    <div ref={ref}>
+      {isLoading ? (
+        <>
+          <Skeleton width={30} height={10} />
+          <Spacing size={3} />
+          <Skeleton width={30} height={10} />
+        </>
+      ) : (
+        data.map((review) => <div>{review}</div>)
+      )}
+    </div>
+  )
+}
