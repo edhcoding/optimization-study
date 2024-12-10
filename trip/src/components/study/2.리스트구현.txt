@@ -1,0 +1,13 @@
+1. Firebase storage에 임의의 목 데이터 추가할거라서 pages에 새로운 페이지 2개 생성
+
+2. App.tsx에서 페이지 분기 처리할거임 (App.css, index.css 삭제)
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<HotelList />} />
+    <Route path="/test" element={<Test />} />
+  </Routes>
+</BrowserRouter>
+
+3. Test 페이지에서 버튼 누르면 Firebase에 데이터 저장되게 해볼거임
+conponents/test/HotelListAddButton.tsx 생성
+mock/data.js 생성
