@@ -70,10 +70,14 @@ yarn add -D @types/testing-library__jest-dom @testing-library/jest-dom
 
 14. yarn dlx @yarnpkg/sdks vscode
 
-15. craco 설정
+15. package.json scripts 추가
+"lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+"lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+
+16. craco 설정
 yarn add -D @craco/craco craco-alias
 
-16. tsconfig.paths.json 파일 생성 후 추가
+17. tsconfig.paths.json 파일 생성 후 추가
 {
   "compilerOptions": {
     "baseUrl": ".",
@@ -84,7 +88,7 @@ yarn add -D @craco/craco craco-alias
   }
 }
 
-17. craco.config.js 파일 생성 후 추가
+18. craco.config.js 파일 생성 후 추가
 const CracoAlias = require('craco-alias')
 
 module.exports = {
@@ -99,18 +103,57 @@ module.exports = {
   ],
 }
 
-18. tsconfig.json 파일 수정
+19. tsconfig.json 파일 수정
 - "extends": "./tsconfig.paths.json", compilerOptions 밖에 추가
 - "include": ["src", "tsconfig.paths.json"] include 부분에 추가
 
-19. package.json안에 scripts에 react-scripts 제거 하고 craco 명령어 추가
+20. package.json안에 scripts에 react-scripts 제거 하고 craco 명령어 추가
 - "start": "craco start",
 - "build": "craco build",
 - "test": "craco test",
 - "eject": "react-scripts eject",
 
-20. yarn start 실행 후 확인
+21. yarn start 실행 후 확인
 
-21. package.json scripts 추가
-"lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
-"lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+22. 다시 프로젝트 종류 후 Emotion 설치
+yarn add @emotion/react @emotion/styled
+- 변경 yarn add @emotion/react@^11.13.5 @emotion/styled@^11.13.5
+yarn add -D @emotion/babel-plugin @babel/preset-react
+- 변경 yarn add -D @babel/preset-react@^7.25.9
+
+23. craco.config.js 에서 babel 설정 추가
+- plugins 아래에
+babel: {
+    presets: [
+      [
+        '@babel/preset-react',
+        { runtime: 'automatic', importSource: '@emotion/react' },
+      ],
+    ],
+    plugins: ['@emotion/babel-plugin'],
+  },
+
+24. tsconfig.json 파일에서
+"jsxImportSource": "@emotion/react"
+
+25. MCARD에서 shared, styles 가져오고
+color 코드 수정
+yarn add react-router-dom
+
+26. globalStyles.ts 적용
+index.tsx 에서 적용
+emotion/react 에서 Global 가져오기 styles 속성에 globalStyles 적용
+<Global styles={globalStyles} />
+
+27. firebase 설정
+- 프로젝트 생성
+- web 프로젝트 생성
+- yarn add firebase
+- firebase SDK 추가하기 부분 복사 => remote/firebase.ts 파일 생성 후 추가 => 안에 들어있는 key 값 env 파일 생성 후 추가 (.gitignore 파일에 .env 추가) => 
+firebase.ts에 적용 => const analytics = getAnalytics(app) 이 부분 삭제
+- store, auth도 사용할거니까 설정해줘야함 => 하단에 추가하기
+export const app = initializeApp(firebaseConfig)
+export const auth = getAuth(app)
+export const store = getFirestore(app)
+- 홈페이지로 가서 Authentication => 시작하기
+- 홈페이지로 가서 Firestore => 데이터베이스 만들기 => 위치 (서울) => 테스트 모드로 시작하기
