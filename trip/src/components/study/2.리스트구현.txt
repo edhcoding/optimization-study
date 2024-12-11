@@ -11,3 +11,7 @@
 3. Test 페이지에서 버튼 누르면 Firebase에 데이터 저장되게 해볼거임
 conponents/test/HotelListAddButton.tsx 생성
 mock/data.js 생성
+
+4. yarn add @tanstack/react-query
+
+5. yarn add react-infinite-scroll-component (무한 스크롤)

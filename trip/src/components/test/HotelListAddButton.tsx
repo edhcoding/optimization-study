@@ -28,7 +28,7 @@ export default function HotelListAddButton() {
         images: IMAGES,
         price: random(130000, 200000),
         // 호텔 성급
-        starRaing: random(1, 5),
+        starRating: random(1, 5),
         // 컨텐츠 요소는 그대로
         ...HOTEL,
         // 이벤트도 모두 가지고 있으면 이상하니까 특정애들만 줘볼거임

@@ -2,7 +2,7 @@ import Flex from '@/components/shared/Flex'
 import Skeleton from '@/components/shared/Skeleton'
 import Spacing from '@/components/shared/Spacing'
 import Text from '@/components/shared/Text'
-import { css } from '@emotion/react'
+import { css, SerializedStyles } from '@emotion/react'
 
 interface ListRowProps {
   left?: React.ReactNode
@@ -11,6 +11,7 @@ interface ListRowProps {
   withArrow?: boolean
   onClick?: () => void
   as?: 'div' | 'li'
+  style?: SerializedStyles
 }
 
 // ListRow 컴포넌트는 틀을 담당하고 왼쪽, 가운데, 오른쪽, 화살표 이렇게 구멍을 뚫어줄거임
@@ -21,13 +22,20 @@ export default function ListRow({
   withArrow = false,
   onClick,
   as = 'li',
+  style,
 }: ListRowProps) {
   // Flex에 우리는 list를 만들거기 때문에 li로 표현하기 위해서 as="li"를 써줌
   return (
-    <Flex as={as} css={listRowContainerStyles} onClick={onClick} align="center">
-      <Flex css={listRowLeftStyles}>{left}</Flex>
+    <Flex
+      as={as}
+      css={[listRowContainerStyles, style]}
+      onClick={onClick}
+      align="center"
+    >
+      {/* left가 없음에도 그려지는 문제가 있어서 조건을 추가할거임 */}
+      {left && <Flex css={listRowLeftStyles}>{left}</Flex>}
       <Flex css={listRowContentsStyles}>{contents}</Flex>
-      <Flex>{right}</Flex>
+      {right && <Flex>{right}</Flex>}
       {withArrow ? <IconArrowRight /> : null}
     </Flex>
   )
