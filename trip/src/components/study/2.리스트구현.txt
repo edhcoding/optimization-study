@@ -15,3 +15,6 @@ mock/data.js 생성
 4. yarn add @tanstack/react-query
 
 5. yarn add react-infinite-scroll-component (무한 스크롤)
+
+6. yarn add date-fns
+- 호텔 리스트의 이벤트 날짜 처리

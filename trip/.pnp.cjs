@@ -41,6 +41,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.3.14"],\
           ["@types/react-dom", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:18.3.3"],\
           ["craco-alias", "npm:3.0.1"],\
+          ["date-fns", "npm:4.1.0"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-prettier", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:9.1.0"],\
           ["eslint-config-react-app", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:7.0.1"],\
@@ -9401,6 +9402,15 @@ const RAW_RUNTIME_STATE =
           ["call-bind", "npm:1.0.8"],\
           ["es-errors", "npm:1.3.0"],\
           ["is-data-view", "npm:1.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["date-fns", [\
+      ["npm:4.1.0", {\
+        "packageLocation": "./.yarn/cache/date-fns-npm-4.1.0-764604ee0f-b79ff32830.zip/node_modules/date-fns/",\
+        "packageDependencies": [\
+          ["date-fns", "npm:4.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19193,6 +19203,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.3.14"],\
           ["@types/react-dom", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:18.3.3"],\
           ["craco-alias", "npm:3.0.1"],\
+          ["date-fns", "npm:4.1.0"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-prettier", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:9.1.0"],\
           ["eslint-config-react-app", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:7.0.1"],\

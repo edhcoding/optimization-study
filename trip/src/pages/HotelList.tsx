@@ -8,8 +8,6 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 export default function HotelList() {
   const { data: hotels, hasNextPage, loadMore } = useHotels()
 
-  console.log(hotels)
-
   return (
     <div>
       <Top title="인기 호텔" subTitle="호텔부터 펜션까지 최저가" />
