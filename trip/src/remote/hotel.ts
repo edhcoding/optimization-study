@@ -3,6 +3,8 @@ import { Hotel } from '@/models/hotel'
 import { store } from '@/remote/firebase'
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   limit,
   query,
@@ -42,4 +44,15 @@ export default async function getHotels(pageParams?: QuerySnapshot<Hotel>) {
     items,
     lastVisible,
   }
+}
+
+// 상세 데이터 호출함수
+// 바로 사용해도 좋지만 데이터 렌더링 하는쪽과 호출하는 로직 분리할거임 (hook으로 분리)
+export async function getHotel(id: string) {
+  const snapshot = await getDoc(doc(store, COLLECTIONS.HOTEL, id))
+
+  return {
+    id,
+    ...snapshot.data(),
+  } as Hotel
 }

@@ -54,6 +54,7 @@ const RAW_RUNTIME_STATE =
           ["react-infinite-scroll-component", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:6.1.0"],\
           ["react-router-dom", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:7.0.2"],\
           ["react-scripts", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:5.0.1"],\
+          ["swiper", "npm:9.4.1"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
         ],\
@@ -18421,6 +18422,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["ssr-window", [\
+      ["npm:4.0.2", {\
+        "packageLocation": "./.yarn/cache/ssr-window-npm-4.0.2-01f9c0151e-e91f690f42.zip/node_modules/ssr-window/",\
+        "packageDependencies": [\
+          ["ssr-window", "npm:4.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["ssri", [\
       ["npm:12.0.0", {\
         "packageLocation": "./.yarn/cache/ssri-npm-12.0.0-97c0e53d2e-caddd5f544.zip/node_modules/ssri/",\
@@ -18890,6 +18900,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["swiper", [\
+      ["npm:9.4.1", {\
+        "packageLocation": "./.yarn/cache/swiper-npm-9.4.1-38d46d35a3-29feb1e92c.zip/node_modules/swiper/",\
+        "packageDependencies": [\
+          ["swiper", "npm:9.4.1"],\
+          ["ssr-window", "npm:4.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["symbol-tree", [\
       ["npm:3.2.4", {\
         "packageLocation": "./.yarn/cache/symbol-tree-npm-3.2.4-fe70cdb75b-dfbe201ae0.zip/node_modules/symbol-tree/",\
@@ -19216,6 +19236,7 @@ const RAW_RUNTIME_STATE =
           ["react-infinite-scroll-component", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:6.1.0"],\
           ["react-router-dom", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:7.0.2"],\
           ["react-scripts", "virtual:bdba8ca1e2b69561da3697495da50df5e2d6341e888b2946c550a9e1fec2c54a1bdb0a020f68b10d716c3020a8038c2f5206e82742185d6ceb8accef7ffc46af#npm:5.0.1"],\
+          ["swiper", "npm:9.4.1"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
         ],\

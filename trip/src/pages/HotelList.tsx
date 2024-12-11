@@ -1,5 +1,5 @@
 import useHotels from '@/components/hotelList/hooks/useHotels'
-import Hotel from '@/components/hotelList/Hotel'
+import HotelItem from '@/components/hotelList/HotelItem'
 import Spacing from '@/components/shared/Spacing'
 import Top from '@/components/shared/Top'
 import { Fragment } from 'react'
@@ -24,7 +24,7 @@ export default function HotelList() {
         <ul>
           {hotels?.map((hotel, i) => (
             <Fragment key={hotel.id}>
-              <Hotel hotel={hotel} />
+              <HotelItem hotel={hotel} />
               {/* 맨 마지막 요소에는 구분해주는 Spacing이 필요없음 */}
               {hotels.length - 1 === i ? null : (
                 <Spacing
