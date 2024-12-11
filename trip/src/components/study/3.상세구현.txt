@@ -1,3 +1,19 @@
 1. yarn add swiper@^9.0.0
 
-2. 
+2. Markdown이란?
+- 약속된 string 형식을 가지고 HTML을 표현할 수 있는 언어를 마크다운이라고 함
+ex)
+# 제목 => <h1 ~ 6>
+## 제목2
+### 제목3
+
+- 항목 1 => <ul> <li>
+- 항목 2
+  - 하위 항목 3
+
+[Google](https://www.google.com) <a>
+
+현재 우리 데이터의 contents에는 마크다운 형식으로 데이터가 저장되어있음
+- 이거를 HTML로 변환해서 표현해줘야함
+- react-markdown 라이브러리를 사용하면 좀 더 쉽게 변환해줄 수 있음 (https://github.com/remarkjs/react-markdown#readme)
+yarn add react-markdown
