@@ -4,12 +4,14 @@ import { store } from '@/remote/firebase'
 import {
   collection,
   doc,
+  documentId,
   getDoc,
   getDocs,
   limit,
   query,
   QuerySnapshot,
   startAfter,
+  where,
 } from 'firebase/firestore'
 
 // 호텔 데이터 불러오는 함수
@@ -55,4 +57,23 @@ export async function getHotel(id: string) {
     id,
     ...snapshot.data(),
   } as Hotel
+}
+
+// 추천 호텔 데이터 호출함수
+// string[] 형태로 받아오기 - 전부 가져올거임
+export async function getRecommendHotels(hotelIds: string[]) {
+  const recommendQuery = query(
+    collection(store, COLLECTIONS.HOTEL), // 전체 문서중에서
+    where(documentId(), 'in', hotelIds), // 문서의 아이디가 hotelId가 포함되어있는 hotel 문서를 가져옴
+  )
+
+  const snapshot = await getDocs(recommendQuery)
+
+  return snapshot.docs.map(
+    (doc) =>
+      ({
+        id: doc.id,
+        ...doc.data(),
+      }) as Hotel,
+  )
 }
