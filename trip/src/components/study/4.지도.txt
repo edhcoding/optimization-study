@@ -1,0 +1,12 @@
+청첩장에서는 카카오 지도 사용했는데 이번에는 구글맵을 사용해볼거임
+
+https://console.cloud.google.com/google/maps-apis/home;onboard=true?project=trip-444513&inv=1&invt=Abj7Qw
+구글 맵 플랫폼 접속 => 인증 절차 => API 키 발금 => 웹 제한 클릭해서 http://localhost:3000 추가
+구글 맵 플랫폼 왼쪽 메뉴바에 있는 키 및 사용자 인증 정보 클릭해서 API 키랑 제한 주소 확인
+
+구글 맵을 띄우려면 라이브러리 설치해야함
+@react-google-maps/api (https://www.npmjs.com/package/@react-google-maps/api)
+설치
+yarn add @react-google-maps/api
+
+API키는 => REACT_APP_GOOGLE_MAP_API
