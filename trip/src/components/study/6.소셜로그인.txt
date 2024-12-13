@@ -1,0 +1,11 @@
+firebase Authentication 에서 로그인 방법 설정 => 구글클릭 => 사용 설정 클릭 => 공유 이름, 지원 이메일 설정 => 저장 클릭
+설정(settings)탭 클릭 => 승인된 도메인에는 나중에 배포한 주소 링크 넣어줘야 소셜 로그인 사용 가능함
+
+useGoogleSignin 훅 만들어서 사용해보기
+
+AuthGuard 컴포넌트로 인증 처리해줘야함
+- yarn add recoil
+라이브러리 설치해서 user 정보를 전역 상태로 관리해줘야함
+
+!!!!주의 recoil은 현재 react 19 버전은 지원 안하므로 다운그레이드 해줘야함
+yarn add react@^18.2.0 react-dom@^18.2.0

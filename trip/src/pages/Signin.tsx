@@ -1,0 +1,33 @@
+import Button from '@/components/shared/Button'
+import Flex from '@/components/shared/Flex'
+import Spacing from '@/components/shared/Spacing'
+import useGoogleSign from '@/hooks/useGoogleSign'
+
+export default function SigninPage() {
+  const { signin } = useGoogleSign()
+
+  return (
+    <Flex direction="column" align="center" style={{ padding: 24 }}>
+      <Spacing size={100} />
+      <img
+        src="https://cdn2.iconfinder.com/data/icons/line-drawn-social-media/30/send-64.png"
+        alt="회원가입 페이지 로고"
+        width={120}
+        height={120}
+      />
+      <Spacing size={60} />
+      <Button size="medium" onClick={signin}>
+        <Flex justify="center" align="center">
+          <img
+            src="https://cdn3.iconfinder.com/data/icons/logos-brands-3/24/logo_brand_brands_logos_google-64.png"
+            alt="구글 로그인"
+            width={20}
+            height={20}
+          />
+          <Spacing direction="horizontal" size={4} />
+          Google 로그인
+        </Flex>
+      </Button>
+    </Flex>
+  )
+}
