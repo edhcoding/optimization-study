@@ -8,10 +8,22 @@ import addDelimeter from '@/utils/addDeliMiter'
 import Tag from '@/components/shared/Tag'
 import { differenceInMilliseconds, parseISO } from 'date-fns'
 import formatTime from '@/utils/formatTime'
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function HotelItem({ hotel }: { hotel: Hotel }) {
+export default function HotelItem({
+  hotel,
+  isLike,
+  onLike,
+}: {
+  hotel: Hotel
+  isLike: boolean
+  onLike: ({
+    hotel,
+  }: {
+    hotel: Pick<Hotel, 'name' | 'id' | 'mainImageUrl'>
+  }) => void
+}) {
   // 실시간으로 프로모션 이벤트 남은 시간을 그려줘야 하기 때문에 useState 사용해야함
   const [remainedTime, setRemainedTime] = useState(0)
 
@@ -34,6 +46,17 @@ export default function HotelItem({ hotel }: { hotel: Hotel }) {
         <Spacing size={8} />
       </div>
     )
+  }
+
+  const handleLike = (e: MouseEvent<HTMLImageElement>) => {
+    e.preventDefault()
+    onLike({
+      hotel: {
+        name: hotel.name,
+        mainImageUrl: hotel.mainImageUrl,
+        id: hotel.id,
+      },
+    })
   }
 
   useEffect(() => {
@@ -87,7 +110,21 @@ export default function HotelItem({ hotel }: { hotel: Hotel }) {
             </Flex>
           }
           right={
-            <Flex direction="column" align="flex-end">
+            <Flex
+              direction="column"
+              align="flex-end"
+              style={{ position: 'relative' }}
+            >
+              <img
+                src={
+                  isLike
+                    ? 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-128.png'
+                    : 'https://cdn0.iconfinder.com/data/icons/phosphor-regular-vol-3/256/heart-512.png'
+                }
+                alt="찜하기"
+                css={iconHeartStyles}
+                onClick={handleLike}
+              />
               <img
                 src={hotel.mainImageUrl}
                 alt="호텔 메인이미지"
@@ -115,4 +152,12 @@ const imageStyles = css`
   border-radius: 8px;
   object-fit: cover;
   margin-left: 16px;
+`
+
+const iconHeartStyles = css`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
 `
