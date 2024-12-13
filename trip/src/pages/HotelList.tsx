@@ -10,7 +10,6 @@ export default function HotelList() {
   const { data: hotels, hasNextPage, loadMore } = useHotels()
 
   const { data: likes, mutate: like } = useLike()
-  console.log(likes)
 
   return (
     <div>

@@ -128,3 +128,17 @@ export async function toggleLike({
     return setDoc(doc(collection(store, COLLECTIONS.LIKE)), newLike)
   }
 }
+
+export function updateOrder(likes: Like[]) {
+  const batch = writeBatch(store)
+
+  // 업데이트 대상들을 받아서 루프를 돌거임
+  likes.forEach((like, i) => {
+    batch.update(doc(collection(store, COLLECTIONS.LIKE), like.id), {
+      // order: i + 1,
+      order: like.order,
+    })
+  })
+
+  return batch.commit()
+}

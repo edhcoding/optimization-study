@@ -1,5 +1,6 @@
 import Button from '@/components/shared/Button'
 import Flex from '@/components/shared/Flex'
+import Spacing from '@/components/shared/Spacing'
 import useUser from '@/hooks/auth/useUser'
 import { colors } from '@/styles/colorPalette'
 import { css } from '@emotion/react'
@@ -18,18 +19,29 @@ export default function Navbar() {
   const renderButton = useCallback(() => {
     if (user != null) {
       return (
-        <Link to="/my">
-          <img
-            src={
-              user.photoURL ??
-              'https://cdn0.iconfinder.com/data/icons/cryptocurrency-137/128/1_profile_user_avatar_account_person-132-128.png'
-            }
-            alt="유저 프로필 이미지"
-            width={40}
-            height={40}
-            style={{ borderRadius: '100%' }}
-          />
-        </Link>
+        <Flex align="center">
+          <Link to="/my">
+            <img
+              src={
+                user.photoURL ??
+                'https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png'
+              }
+              alt="유저 프로필 이미지"
+              width={40}
+              height={40}
+              style={{ borderRadius: '100%' }}
+            />
+          </Link>
+          <Spacing size={4} direction="horizontal" />
+          <Link to="/settings">
+            <img
+              src="https://cdn1.iconfinder.com/data/icons/ionicons-outline-vol-2/512/settings-outline-128.png"
+              alt="세팅 페이지"
+              width={40}
+              height={40}
+            />
+          </Link>
+        </Flex>
       )
     }
 

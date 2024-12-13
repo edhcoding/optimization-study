@@ -1,1 +1,9 @@
 useLike.ts, like.ts, HotelList.tsx 파일 생성 및 적용
+
+찜하기 목록 페이지 - 드래그 앤 드롭 방식으로 구현
+react-beautiful-dnd 라이브러리 사용
+yarn add react-beautiful-dnd
+yarn add -D @types/react-beautiful-dnd
+
+이걸로 변경
+yarn add @hello-pangea/dnd
