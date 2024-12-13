@@ -1,0 +1,11 @@
+카카오 디벨로퍼 공유하기 기능 구현
+https://developers.kakao.com/
+
+도구 => JS SDK 데모 클릭 => 카카오톡 공유하기
+예시에 있는 script 주소로 다운 받아야 하니까 복사 - https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js
+
+링크복사는 react-copy-to-clipboard 라이브러리 사용
+https://www.npmjs.com/package/react-copy-to-clipboard
+
+yarn add react-copy-to-clipboard
+yarn add -D @types/react-copy-to-clipboard
