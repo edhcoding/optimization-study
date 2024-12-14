@@ -1769,6 +1769,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@date-fns/tz@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@date-fns/tz@npm:1.2.0"
+  checksum: 10c0/411e9d4303b10951f6fd0189d18fb845f0d934a575df2176bc10daf664282c765fb6b057a977e446bbb1229151d89e7788978600a019f1fc24b5c75276d496bd
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-plugin@npm:^11.13.5":
   version: 11.13.5
   resolution: "@emotion/babel-plugin@npm:11.13.5"
@@ -3936,7 +3943,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:*":
+"@types/qs@npm:*, @types/qs@npm:^6.9.17":
   version: 6.9.17
   resolution: "@types/qs@npm:6.9.17"
   checksum: 10c0/a183fa0b3464267f8f421e2d66d960815080e8aab12b9aadab60479ba84183b1cdba8f4eff3c06f76675a8e42fe6a3b1313ea76c74f2885c3e25d32499c17d1b
@@ -3956,6 +3963,15 @@ __metadata:
   dependencies:
     "@types/react": "npm:*"
   checksum: 10c0/33bea4549fa263b597d0dedb3807f99286d8ccf59adb370e3d82d1c9075195925a343982abd73c63cc47854a7240ddae79873a5cb3590c9b33c1b65bf9d07689
+  languageName: node
+  linkType: hard
+
+"@types/react-day-picker@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@types/react-day-picker@npm:5.3.0"
+  dependencies:
+    react-day-picker: "npm:*"
+  checksum: 10c0/4dc019e27473797522ebd454f5df4a9e6eac510866d96a1e05d1f4fbc83b77a19895a77c4c30120e6f422923474f1cf7aab779bf9ba6e8091554f475923ac64f
   languageName: node
   linkType: hard
 
@@ -12776,6 +12792,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:^6.13.1":
+  version: 6.13.1
+  resolution: "qs@npm:6.13.1"
+  dependencies:
+    side-channel: "npm:^1.0.6"
+  checksum: 10c0/5ef527c0d62ffca5501322f0832d800ddc78eeb00da3b906f1b260ca0492721f8cdc13ee4b8fd8ac314a6ec37b948798c7b603ccc167e954088df392092f160c
+  languageName: node
+  linkType: hard
+
 "querystringify@npm:^2.1.1":
   version: 2.2.0
   resolution: "querystringify@npm:2.2.0"
@@ -12857,6 +12882,28 @@ __metadata:
   peerDependencies:
     react: ^15.3.0 || 16 || 17 || 18
   checksum: 10c0/de70d9f9c2d17cee207888ed791d4a042c300e5ca732503434d49e6745cff56c0d5ebcc82ab86237e9c2248e636d1d031b9f9cf9913ecec61d82a0e5ebc93881
+  languageName: node
+  linkType: hard
+
+"react-day-picker@npm:*":
+  version: 9.4.3
+  resolution: "react-day-picker@npm:9.4.3"
+  dependencies:
+    "@date-fns/tz": "npm:^1.2.0"
+    date-fns: "npm:^4.1.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/f0d2c547bc4f148234db0a422cf6c0f655a76547fb1436057b75bd732aa1497767a5ff4affeaecdb479b58bc155f797afcc8c6a4e5d329a406c41b610bea2e4a
+  languageName: node
+  linkType: hard
+
+"react-day-picker@npm:^8.8.2":
+  version: 8.10.1
+  resolution: "react-day-picker@npm:8.10.1"
+  peerDependencies:
+    date-fns: ^2.28.0 || ^3.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/a0ff28c4b61b3882e6a825b19e5679e2fdf3256cf1be8eb0a0c028949815c1ae5a6561474c2c19d231c010c8e0e0b654d3a322610881e0655abca05a2e03d9df
   languageName: node
   linkType: hard
 
@@ -14822,8 +14869,10 @@ __metadata:
     "@testing-library/user-event": "npm:^13.2.1"
     "@types/jest": "npm:^27.0.1"
     "@types/node": "npm:^16.7.13"
+    "@types/qs": "npm:^6.9.17"
     "@types/react": "npm:^18.0.0"
     "@types/react-copy-to-clipboard": "npm:^5.0.7"
+    "@types/react-day-picker": "npm:^5.3.0"
     "@types/react-dom": "npm:^18.0.0"
     craco-alias: "npm:^3.0.1"
     date-fns: "npm:^4.1.0"
@@ -14834,8 +14883,10 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.2"
     firebase: "npm:^11.0.2"
     prettier: "npm:^3.4.2"
+    qs: "npm:^6.13.1"
     react: "npm:^18.2.0"
     react-copy-to-clipboard: "npm:^5.1.0"
+    react-day-picker: "npm:^8.8.2"
     react-dom: "npm:^18.2.0"
     react-infinite-scroll-component: "npm:^6.1.0"
     react-markdown: "npm:^9.0.1"

@@ -73,7 +73,7 @@ export default function Review({ hotelId }: { hotelId: string }) {
         ))}
       </ul>
     )
-  }, [reviews, user])
+  }, [hotelId, mutate, reviews, user])
 
   const handelTextChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
