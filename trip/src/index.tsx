@@ -4,9 +4,17 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Global } from '@emotion/react'
 import globalStyles from '@/styles/globalStyles'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import { RecoilRoot } from 'recoil'
 import { AlertContextProvider } from '@/contexts/AlertContext'
+
+interface QueryMetaType {
+  onSuccess?: (data: unknown) => void
+}
 
 const client = new QueryClient({
   defaultOptions: {
@@ -15,6 +23,13 @@ const client = new QueryClient({
       retry: 0,
     },
   },
+  queryCache: new QueryCache({
+    onSuccess: (data, query: { meta?: QueryMetaType }) => {
+      if (query.meta?.onSuccess) {
+        query.meta.onSuccess(data)
+      }
+    },
+  }),
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

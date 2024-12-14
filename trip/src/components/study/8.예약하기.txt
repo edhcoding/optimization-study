@@ -1,3 +1,4 @@
+예약하기 - 캘린더
 Rooms.tsx에서 선택 버튼을 누르면 호텔 아이디, 룸 아이디를 가지고 Schedule 페이지로 이동시켜줄건데 정보를 쿼리스트링을 이용해서 저장해볼거임
 
 쿼리스트링을 편하게 다룰 수 있는 라이브러리를 설치해볼거임
@@ -9,3 +10,5 @@ yarn add -D @types/qs
 react-day-picker 라이브러리 사용할거임
 yarn add react-day-picker@^8.8.2
 yarn add -D @types/react-day-picker
+
+예약하기 - 예약 정보
