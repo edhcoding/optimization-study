@@ -15,7 +15,6 @@ export default function Navbar() {
 
   const user = useUser()
 
-  // TODO
   const renderButton = useCallback(() => {
     if (user != null) {
       return (

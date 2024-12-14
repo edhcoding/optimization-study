@@ -3,5 +3,5 @@ export interface Review {
   text: string
   userId: string
   hotelId: string
-  createdAt: Date
+  createdAt: Date | string
 }

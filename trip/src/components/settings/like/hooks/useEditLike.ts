@@ -31,6 +31,7 @@ export default function useEditLike() {
 
   // 순서를 재정의해주는 함수
   const reorder = useCallback((from: number, to: number) => {
+    // 쉽게 인덱스라고 생각하면 됨
     // 2개의 찜 목록이 있을때 2번째를 1번째로 옮기는 경우 => from = 1, to = 0 1번에서 0번으로 옮겼다 이렇게 나옴
 
     setUpdatedLikes((prevUpdatedLikes) => {
@@ -39,11 +40,15 @@ export default function useEditLike() {
 
       // from과 to를 이용해서 위치를 바꿔줄거임
       // 먼저 하나를 잘라낼거임
+      // 1,2,3 이 있는데 2 => 1 로 변경 하면 fromItem = 2 가 됨
+      // newItems는 1,3 이 됨
       const [fromItem] = newItems.splice(from, 1)
 
       // 잘 잘라냈다면 순서를 바꿔줄거임
+      // to는 0 이니까 인덱스 0 위치에 2를 넣으라는 말임
       if (fromItem != null) newItems.splice(to, 0, fromItem)
 
+      // order 재정의
       newItems.forEach((like, i) => {
         like.order = i + 1
       })
