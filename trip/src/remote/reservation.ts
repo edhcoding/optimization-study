@@ -2,7 +2,17 @@ import { COLLECTIONS } from '@/constants'
 import { Reservation } from '@/models/reservation'
 import { Room } from '@/models/room'
 import { store } from '@/remote/firebase'
-import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { getHotel } from '@/remote/hotel'
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from 'firebase/firestore'
 
 export default async function makeReservation(newReservation: Reservation) {
   // 우리가 예약을 한다는건 잔여 객실이 하나가 줄어든다는 건데 다른 사람이 먼저 예약을 하면 잔여 객실이 하나가 줄어들어서 문제가 생김 (매진인 상황)
@@ -30,4 +40,32 @@ export default async function makeReservation(newReservation: Reservation) {
     // 예약 데이터 생성
     setDoc(doc(collection(store, COLLECTIONS.RESERVATION)), newReservation),
   ])
+}
+
+export async function getReservations({ userId }: { userId: string }) {
+  const reservationQuery = query(
+    collection(store, COLLECTIONS.RESERVATION),
+    where('userId', '==', userId),
+  )
+
+  const reservationSnapshot = await getDocs(reservationQuery)
+
+  // 예약 정보, 예약 정보 안에있는 호텔 정보를 합칠 배열을 만들어야해서 담아두기 위한 빈 배열 생성
+  const result = []
+
+  for (const reservationDoc of reservationSnapshot.docs) {
+    const reservation = {
+      id: reservationDoc.id,
+      ...(reservationDoc.data() as Reservation),
+    }
+
+    const hotel = await getHotel(reservation.hotelId)
+
+    result.push({
+      reservation,
+      hotel,
+    })
+  }
+
+  return result
 }

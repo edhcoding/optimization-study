@@ -6,6 +6,8 @@ import HotelPage from '@/pages/Hotel'
 import HotelList from '@/pages/HotelList'
 import MyPage from '@/pages/My'
 import ReservationPage from '@/pages/Reservation'
+import ReservationDonePage from '@/pages/ReservationDone'
+import ReservationListPage from '@/pages/ReservationList'
 import SchedulePage from '@/pages/Schedule'
 import SettingsPage from '@/pages/settings'
 import LikePage from '@/pages/settings/like'
@@ -43,6 +45,14 @@ function App() {
             }
           />
           <Route
+            path="/schedule"
+            element={
+              <PrivateRoute>
+                <SchedulePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/reservation"
             element={
               <PrivateRoute>
@@ -51,10 +61,18 @@ function App() {
             }
           />
           <Route
-            path="/schedule"
+            path="/reservation/done"
             element={
               <PrivateRoute>
-                <SchedulePage />
+                <ReservationDonePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/reservation/list"
+            element={
+              <PrivateRoute>
+                <ReservationListPage />
               </PrivateRoute>
             }
           />
