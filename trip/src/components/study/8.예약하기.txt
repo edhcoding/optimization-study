@@ -12,3 +12,9 @@ yarn add react-day-picker@^8.8.2
 yarn add -D @types/react-day-picker
 
 예약하기 - 예약 정보
+
+예약하기 - 예약 폼
+data.js에 FORMS 데이터를 추가해볼거임
+hotelformaddbutton.tsx 컴포넌트 추가
+form.tsx에서 react-hook-form 라이브러리 사용할거임
+yarn add react-hook-form
