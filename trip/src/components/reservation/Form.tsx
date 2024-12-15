@@ -7,13 +7,17 @@ import { Hotel, ReservationForm } from '@/models/hotel'
 import { Fragment, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
+type FormData = {
+  [key: string]: string
+}
+
 export default function Form({
   forms,
   onSubmit,
   buttonLabel,
 }: {
   forms: Hotel['forms']
-  onSubmit: () => void
+  onSubmit: (formValues: FormData) => void
   buttonLabel: string
 }) {
   /**
@@ -24,7 +28,9 @@ export default function Form({
    *
    * 연결한 폼의 값을 전송하기 위해서는 handleSubmit을 사용해야함
    */
-  const { register, formState, handleSubmit } = useForm({ mode: 'onBlur' })
+  const { register, formState, handleSubmit } = useForm<FormData>({
+    mode: 'onBlur',
+  })
 
   const component = useCallback(
     (form: ReservationForm) => {
@@ -64,9 +70,14 @@ export default function Form({
     <div style={{ padding: 24 }}>
       <Text bold>예약정보</Text>
 
+      <Spacing size={16} />
+
       <form>
         {forms.map((form) => (
-          <Fragment key={form.id}>{component(form)}</Fragment>
+          <Fragment key={form.id}>
+            {component(form)}
+            <Spacing size={8} />
+          </Fragment>
         ))}
       </form>
 

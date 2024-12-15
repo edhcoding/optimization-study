@@ -1,7 +1,9 @@
 import { useAlertContext } from '@/contexts/AlertContext'
+import { Reservation } from '@/models/reservation'
 import { Room } from '@/models/room'
 import { getHotelWithRoom } from '@/remote/hotel'
-import { useQuery } from '@tanstack/react-query'
+import makeReservation from '@/remote/reservation'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 export default function useReservation({
   hotelId,
@@ -28,5 +30,16 @@ export default function useReservation({
     },
   })
 
-  return { data, isLoading }
+  const { mutateAsync } = useMutation({
+    mutationFn: (newReservation: Reservation) =>
+      makeReservation(newReservation),
+    onError: () => {
+      open({
+        title: '에러가 발생했습니다. 잠시후 다시 시도해주세요.',
+        onButtonClick: () => window.history.back(),
+      })
+    },
+  })
+
+  return { data, isLoading, mutateAsync }
 }

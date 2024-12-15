@@ -1,7 +1,13 @@
 // import 'react-day-picker/dist/style.css'
 import { DayPicker, DateRange } from 'react-day-picker'
 import { ko } from 'date-fns/locale'
-import { differenceInDays, format, isSameDay, parseISO } from 'date-fns'
+import {
+  addDays,
+  differenceInDays,
+  format,
+  isSameDay,
+  parseISO,
+} from 'date-fns'
 import styled from '@emotion/styled'
 import { colors } from '@/styles/colorPalette'
 
@@ -61,6 +67,12 @@ export default function RangePicker({
         defaultMonth={today}
         selected={selected}
         onSelect={handleDayClick}
+        // disabled 옵션을 주면 선택할 수 없는 날짜를 설정할 수 있음
+        // 기본으로 before에 new Date() 넣으면 오늘 날짜도 포함인데 우리는 오늘 말고 내일부터 예약신청을 가능하게 할거기 때문에
+        // date-fns 에서 제공하는 addDays 메서드에 두번째 인자로 1을 넣어서 하루 뒤부터 선택할 수 있도록 함
+        disabled={{
+          before: addDays(today, 1),
+        }}
       />
     </Container>
   )
@@ -109,6 +121,7 @@ const Container = styled.div`
     line-height: 45px;
   }
 
+  /* rdp-button 요소가 disabled 속성을 가지고 있으면 스타일을 적용함 */
   .rdp-cell .rdp-button[disabled] {
     color: ${colors.gray200};
   }
