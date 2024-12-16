@@ -9,24 +9,24 @@ import {
 import FixedButton from '@/components/shared/FixedButton'
 import { Like } from '@/models/like'
 import { Virtuoso } from 'react-virtuoso'
-function generateMocks() {
-  const mocks = []
+// function generateMocks() {
+//   const mocks = []
 
-  for (let i = 0; i < 1000; i++) {
-    mocks.push({
-      id: `${i}`,
-      hotelId: `${i}`,
-      hotelName: `hotelName ${i}`,
-      hotelMainImageUrl: `hotelMainImageUrl ${i}`,
-      userId: '',
-      order: i,
-    } as Like)
-  }
+//   for (let i = 0; i < 1000; i++) {
+//     mocks.push({
+//       id: `${i}`,
+//       hotelId: `${i}`,
+//       hotelName: `hotelName ${i}`,
+//       hotelMainImageUrl: `hotelMainImageUrl ${i}`,
+//       userId: '',
+//       order: i,
+//     } as Like)
+//   }
 
-  return mocks
-}
+//   return mocks
+// }
 
-const mocks = generateMocks()
+// const mocks = generateMocks()
 
 export default function LikePage() {
   const { data, isEdit, reorder, save } = useEditLike()
@@ -78,7 +78,7 @@ export default function LikePage() {
                     </Draggable>
                   )
                 }}
-                data={mocks}
+                data={data}
               />
               {droppableProps.placeholder}
             </ul>
