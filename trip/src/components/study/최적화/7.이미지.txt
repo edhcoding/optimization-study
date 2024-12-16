@@ -1,0 +1,7 @@
+이미지 최적화
+IntersectionObserver를 사용하는 방법도 있지만 라이브러리를 이용해서 최적화 해보겠습니다.
+
+yarn add react-lazy-load-image-component
+yarn add -D @types/react-lazy-load-image-component
+
+LazyLoadImage 컴포넌트를 이용해 img 태그를 변경해주고 height 속성값으로 기본 높이를 지정해주면 끝
