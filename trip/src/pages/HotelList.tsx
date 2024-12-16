@@ -5,8 +5,9 @@ import Top from '@/components/shared/Top'
 import useLike from '@/hooks/like/useLike'
 import { Fragment } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import withSuspense from '@/components/shared/hocs/withSuspense'
 
-export default function HotelList() {
+function HotelList() {
   const { data: hotels, hasNextPage, loadMore } = useHotels()
 
   const { data: likes, mutate: like } = useLike()
@@ -51,3 +52,7 @@ export default function HotelList() {
     </div>
   )
 }
+
+export default withSuspense(HotelList, {
+  fallback: <div>Loading.............</div>,
+})

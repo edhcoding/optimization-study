@@ -7,8 +7,9 @@ import {
   DropResult,
 } from '@hello-pangea/dnd'
 import FixedButton from '@/components/shared/FixedButton'
-import { Like } from '@/models/like'
+// import { Like } from '@/models/like'
 import { Virtuoso } from 'react-virtuoso'
+
 // function generateMocks() {
 //   const mocks = []
 

@@ -1,5 +1,5 @@
 import getHotels from '@/remote/hotel'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { useCallback } from 'react'
 // remote/hotel.ts 에서 데이터를 가져오는 함수를 만들었음
 // 데이터를 불러오는쪽이랑 화면에 그리는 걸 완벽하게 분리해볼거임
@@ -11,7 +11,7 @@ export default function useHotels() {
     hasNextPage = false,
     fetchNextPage,
     isFetching,
-  } = useInfiniteQuery<any>({
+  } = useSuspenseInfiniteQuery<any>({
     queryKey: ['hotels'],
     queryFn: ({ pageParam }) => getHotels(pageParam as any),
     initialPageParam: undefined,
