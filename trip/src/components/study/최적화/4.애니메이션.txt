@@ -1,0 +1,18 @@
+애니메이션 최적화
+https://stackblitz.com/edit/stackblitz-starters-ht4nty?description=React%20%20%20TypeScript%20starter%20project&file=src%2FApp.tsx&title=React%20Starter
+
+$animationFrame.style.width 부분의 width를 보면 width 속성을 변경하고 있습니다.
+
+width에 대한 변경은 브라우저 렌더링 엔진에게 레이아웃을 다시 계산하도록 요청합니다.
+
+레이아웃 계산은 비용이 많이 드는 계산 중에 하나입니다.
+
+따라서 setInterval로 레이아웃을 자주 변경하게 되면 자바스크립트 작업이 실행되는동안 또는 브라우저의 다른 처리가 필요할때 지정된 간격보다 더 늦게 실행이 될 수도 있고 오히려 더 빠르게 실행될 수도 있습니다.
+
+그렇기때문에 실제 화면에 렌더링되는 프레임수가 줄어들게 되면서 프레임 드랍이 발생하고 뚝뚝 끊기는 것처럼 보이게 됩니다.
+
+
+
+정확한 타이밍을 보장하지 않는 setInterval에 비해서 animationFrame 같은 경우에는 브라우저의 렌더링 주기와 동기화돼서 실행됩니다.
+
+RequestAnimation 콜백에 DOM을 변경하는 함수를 넣어주게 되면 해당 변경은 브라우저의 다음 렌더링 주기에 최적화된 방식으로 반영이 되기 때문에 RequestAnimationFrame을 사용하는게 애니메이션을 처리할 때 훨씬 더 좋습니다.
