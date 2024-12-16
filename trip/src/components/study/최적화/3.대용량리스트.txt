@@ -1,0 +1,5 @@
+대용량 리스트를 다루는 방법 - 찜 리스트 최적화
+virtuoso 라이브러리 사용 (https://virtuoso.dev/)
+https://www.npmjs.com/package/react-virtuoso
+
+yarn add react-virtuoso

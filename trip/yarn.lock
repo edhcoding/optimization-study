@@ -13143,6 +13143,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-virtuoso@npm:^4.12.3":
+  version: 4.12.3
+  resolution: "react-virtuoso@npm:4.12.3"
+  peerDependencies:
+    react: ">=16 || >=17 || >= 18"
+    react-dom: ">=16 || >=17 || >= 18"
+  checksum: 10c0/609f06098fce65c6b6f687d84f108d8e4e7b75cfe329f3554c37252c28ff54081c4a2bd970da0dc16d2e417d70ccbd8b393e17b94b954ea360c0fb87c9712e32
+  languageName: node
+  linkType: hard
+
 "react@npm:^18.2.0":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
@@ -14902,6 +14912,7 @@ __metadata:
     react-markdown: "npm:^9.0.1"
     react-router-dom: "npm:^7.0.2"
     react-scripts: "npm:5.0.1"
+    react-virtuoso: "npm:^4.12.3"
     recoil: "npm:^0.7.7"
     swiper: "npm:^9.0.0"
     typescript: "npm:^4.4.2"

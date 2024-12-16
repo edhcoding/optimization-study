@@ -1,1 +1,4 @@
 코드 스플리팅
+React.lazy()
+Suspense
+사용

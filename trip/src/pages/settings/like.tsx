@@ -7,6 +7,26 @@ import {
   DropResult,
 } from '@hello-pangea/dnd'
 import FixedButton from '@/components/shared/FixedButton'
+import { Like } from '@/models/like'
+import { Virtuoso } from 'react-virtuoso'
+function generateMocks() {
+  const mocks = []
+
+  for (let i = 0; i < 1000; i++) {
+    mocks.push({
+      id: `${i}`,
+      hotelId: `${i}`,
+      hotelName: `hotelName ${i}`,
+      hotelMainImageUrl: `hotelMainImageUrl ${i}`,
+      userId: '',
+      order: i,
+    } as Like)
+  }
+
+  return mocks
+}
+
+const mocks = generateMocks()
 
 export default function LikePage() {
   const { data, isEdit, reorder, save } = useEditLike()
@@ -32,28 +52,35 @@ export default function LikePage() {
               ref={droppableProps.innerRef}
               {...droppableProps.droppableProps}
             >
-              {data?.map((like, i) => (
-                <Draggable key={like.id} draggableId={like.id} index={i}>
-                  {(draggableProps) => (
-                    <li
-                      ref={draggableProps.innerRef}
-                      {...draggableProps.draggableProps}
-                      {...draggableProps.dragHandleProps}
-                    >
-                      <ListRow
-                        as="div"
-                        contents={
-                          <ListRow.Texts
-                            title={like.order}
-                            subTitle={like.hotelName}
+              <Virtuoso
+                useWindowScroll
+                increaseViewportBy={0}
+                itemContent={(i, like) => {
+                  return (
+                    <Draggable key={like.id} draggableId={like.id} index={i}>
+                      {(draggableProps) => (
+                        <li
+                          ref={draggableProps.innerRef}
+                          {...draggableProps.draggableProps}
+                          {...draggableProps.dragHandleProps}
+                        >
+                          <ListRow
+                            as="div"
+                            contents={
+                              <ListRow.Texts
+                                title={like.order}
+                                subTitle={like.hotelName}
+                              />
+                            }
                           />
-                        }
-                      />
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-              {droppableProps.placeholder} {/* 이 부분을 추가해주세요 */}
+                        </li>
+                      )}
+                    </Draggable>
+                  )
+                }}
+                data={mocks}
+              />
+              {droppableProps.placeholder}
             </ul>
           )}
         </Droppable>
