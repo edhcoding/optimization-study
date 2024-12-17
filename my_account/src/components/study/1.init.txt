@@ -1,0 +1,98 @@
+1. 설치
+npx create-next-app@latest
+
+✔ What is your project named? … 프로젝트 이름(my_account)
+✔ Would you like to use TypeScript? … Yes
+✔ Would you like to use ESLint? …  Yes
+✔ Would you like to use Tailwind CSS? … No
+✔ Would you like your code inside a `src/` directory? … Yes
+✔ Would you like to use App Router? (recommended) … No
+✔ Would you like to use Turbopack for `next dev`? … No => 아직 베타 버전이라 사용하지 않음
+✔ Would you like to customize the import alias (`@/*` by default)? … Yes
+✔ What import alias would you like configured? … @/* => 그냥 기본 설정 그대로 사용 (enter 누르면 됨)
+
+끝
+
+2. node_modules 삭제
+
+3. yarn set version berry
+
+4. corepack enable => yarn set version berry 다시 실행
+
+5. .yarnrc.yml에 아래 코드 추가
+nodeLinker: pnp
+enableGlobalCache: false
+
+6. yarn install
+
+7. yarn dlx @yarnpkg/sdks vscode => typescript vscode한테 알려줌
+
+8. .gitignore 파일 생성 후 아래 코드 추가
+# yarn zero-install
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+9. 처음 설치할 때 eslint 설치 Yes 했기 때문에 eslint.config.mjs 파일 생성 돼있기 때문에 prettier 설치해줘야함
+yarn add -D prettier eslint-plugin-prettier eslint-config-prettier
+yarn add react@^18.2.0 react-dom@^18.2.0 => 19는 최신버전이고 오류많아서 다운그레이드 해야함
+yarn add -D @types/react@^18.2.0 @types/react-dom@^18.2.0 => 다운그레이드
+
+yarn add next@^14.1.0 => 15버전도 베타라서 오류 많음 다운그레이드
+yarn add -D eslint-config-next@^14.1.0 => 다운그레이드
+
+yarn add -D eslint@^8.57.0 => 9버전도 베타라서 오류 많음 다운그레이드
+
+package.json에 "@eslint/eslintrc": "^3", 이게 있는데 이건 eslint 9 버전용 패키지이기 때문에 삭제
+yarn remove @eslint/eslintrc
+
+10. eslint.config.mjs 파일을 삭제하고 .eslintrc.json 파일 생성하고 아래 코드 추가
+원래 코드는
+{
+  "extends": "next/core-web-vitals"
+}
+이거인데 prettier 설치 해줬기 때문에 아래 처럼 추가
+{
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
+이렇게 하면 prettier가 잘 작동할 텐데 어떻게 동작했으면 좋을지에 대한 설정을 하나 더 해줘야함
+
+11. .prettierrc 파일 생성 후 아래 코드 추가
+{
+  "useTabs": false,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "endOfLine": "lf",
+  "semi": false,
+  "arrowParens": "always"
+}
+
+12. eslint, prettier가 정상 작동하도록 경로를 맞춰줘야함
+yarn dlx @yarnpkg/sdks vscode
+
+13. next.config.ts 파일 => next.config.js 파일로 변경하고 아래 코드로 변경
+.js 파일에서는 CommonJS 모듈 시스템을 사용해야함
+
+const nextConfig = {
+  /* config options here */
+  reactStrictMode: true,
+}
+
+module.exports = nextConfig
+
+
+14. 지금 까지 설정 잘 됐고 실행 잘 되는지 확인
+yarn build => 계속 오류 나올건데 수정하고 다시 yarn build 반복 해줌
+yarn dev => 정상 작동 확인
+
+15. 프로젝트가 잘 나온다면 이제는 emotion 설정 해줄거임
