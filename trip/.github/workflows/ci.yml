@@ -1,0 +1,38 @@
+# 워크플로우 이름
+name: CI
+
+# 이벤트 발생 조건
+on: [pull_request]
+
+# 이벤트 발생 시 실행할 세부 작업들
+jobs:
+  # pull_request 이벤트 발생 시 lint, build 작업 실행
+  lint:
+    # job 이름
+    name: Lint
+    # ubuntu 환경에서 실행
+    runs-on: ubuntu-latest
+
+    # 작업 실행 단계, 환경 세팅
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        # 노드 버전 18 사용
+        with:
+          node-version: '18'
+      # 위에 모든게 세팅이 되었을때 yarn install, yarn lint 명령어 실행
+      - run: yarn install
+      - run: yarn lint
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - run: yarn install
+      # CI = 'true' 로 설정하면 build 중에 발생하는 경고를 가끔 오류로 취급해서 build가 실패하는 경우가 있음 (vercel 에서 가끔 생김)
+      # 이런 경우를 방지하고자 오류로 판단하지 않게 하기 위해서 CI='false' 로 설정
+      - run: CI='false' yarn build
