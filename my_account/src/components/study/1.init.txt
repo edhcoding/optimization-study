@@ -132,3 +132,11 @@ compilerOptions에 아래 코드 추가
 styles 폴더 삭제
 
 index.tsx 파일로가서 필요없는 코드 삭제하고 동작 확인
+
+20. 전 프로젝트에서 shared, styles 폴더 가져오기
+
+21. tsconfig.json에서 alias 설정 추가
+baseUrl 안넣으면
+"@components/*": ["src/components/*"], 이 부분이
+"@components/*": ["./src/components/*"], 이렇게 되어있음
+그래서 baseUrl: '.' 추가해줘야함
