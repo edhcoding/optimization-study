@@ -2,7 +2,9 @@
 name: CI
 
 # 이벤트 발생 조건
-on: [pull_request]
+on:
+  pull_request:
+    branches: [main] # main 브랜치로의 PR에만 적용
 
 # 이벤트 발생 시 실행할 세부 작업들
 jobs:
