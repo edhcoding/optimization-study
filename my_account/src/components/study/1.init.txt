@@ -86,6 +86,12 @@ yarn dlx @yarnpkg/sdks vscode
 const nextConfig = {
   /* config options here */
   reactStrictMode: true,
+  experimental: {
+    forceSwcTransforms: true,
+  },
+  compiler: {
+    emotion: true,
+  },
 }
 
 module.exports = nextConfig
@@ -95,4 +101,34 @@ module.exports = nextConfig
 yarn build => 계속 오류 나올건데 수정하고 다시 yarn build 반복 해줌
 yarn dev => 정상 작동 확인
 
-15. 프로젝트가 잘 나온다면 이제는 emotion 설정 해줄거임
+15. 여기서 한 번 git push 하려고 했는데 cache폴더 용량이 너무 큼 => 버퍼 증가 시키려고
+git config --global http.postBuffer 157286400
+
+16. 프로젝트가 잘 나온다면 이제는 emotion 설정 해줄거임
+yarn add @emotion/react @emotion/styled
+- 변경 yarn add @emotion/react@^11.13.5 @emotion/styled@^11.13.5
+
+17. emotion jsx를 사용하기 위해서는 바벨 설정이 필요함
+root에 .babelrc 파일을 생성 후 아래 코드 추가
+{
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-react": {
+          "runtime": "automatic",
+          "importSource": "@emotion/react"
+        }
+      }
+    ]
+  ]
+}
+
+18. tsconfig.json 파일에도 설정 추가해줘야함
+compilerOptions에 아래 코드 추가
+"jsxImportSource": "@emotion/react"
+
+19. 동작 확인 하기 전에 필요없는 폴더 삭제
+styles 폴더 삭제
+
+index.tsx 파일로가서 필요없는 코드 삭제하고 동작 확인
