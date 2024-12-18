@@ -14,7 +14,7 @@ function EventBanners() {
   console.log(data)
 
   return (
-    <div>
+    <div style={{ padding: 24 }}>
       <Swiper spaceBetween={8}>
         {data.map((eventBanner) => (
           <SwiperSlide key={eventBanner.id}>
@@ -51,8 +51,16 @@ const bannerStyles = css`
   border-radius: 8px;
 `
 
+export function BannerSkeleton() {
+  return (
+    <div style={{ padding: 24 }}>
+      <Skeleton width="100%" height={100} style={{ borderRadius: 8 }} />
+    </div>
+  )
+}
+
 export default withSuspense(EventBanners, {
   // 컴포넌트가 렌더링 될때 CLS가 생기니까 스켈레톤 컴포넌트 렌더링
   // Dynamic import의 loading 옵션에도 똑같이 넣어줬음
-  fallback: <Skeleton width="100%" height={100} style={{ borderRadius: 8 }} />,
+  fallback: <BannerSkeleton />,
 })
