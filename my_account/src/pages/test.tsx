@@ -1,3 +1,4 @@
+import CardListAddButton from '@/components/test/CardListAddButton'
 import EventBannerAddButton from '@/components/test/EventBannerAddButton'
 
 export default function TestPage() {
@@ -11,6 +12,7 @@ export default function TestPage() {
       }}
     >
       <EventBannerAddButton />
+      <CardListAddButton />
     </div>
   )
 }
