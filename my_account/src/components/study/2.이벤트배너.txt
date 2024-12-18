@@ -1,0 +1,13 @@
+1. mock/banner.ts 파일 생성해서 데이터 생성
+
+2. EventBannerAddButton.tsx 파일 생성해서 데이터 추가 버튼 생성
+
+3. test 페이지에 추가해서 데이터생성
+
+최적화 - Dynamic import 사용해서 데이터 가져오기
+
+Tanstack Query 사용해서 데이터 가져오기
+yarn add @tanstack/react-query
+
+배너 스와이프해줄거라서
+yarn add swiper@^9.0.0
