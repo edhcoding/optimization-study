@@ -140,3 +140,12 @@ baseUrl 안넣으면
 "@components/*": ["src/components/*"], 이 부분이
 "@components/*": ["./src/components/*"], 이렇게 되어있음
 그래서 baseUrl: '.' 추가해줘야함
+
+22. 글로벌 스타일 설정
+_app.tsx에 <Global styles={globalStyles} /> 추가
+
+23. Firebase 설정
+web클릭 => yarn add firebase => SDK 추가하는 곳에있는 key 복사해서 .env 파일에 추가
+.env는 CRA가 아니니까 REACT_APP_ 말고 next니까 NEXT_PUBLIC_ 사용
+
+.env만 설정하고 => 콘솔로이동 => src/remote/firebase.ts 파일 생성 후 코드 작성 (코드 주석 참고)
