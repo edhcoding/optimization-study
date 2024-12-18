@@ -1,0 +1,2 @@
+CreditScoreChart 컴포넌트 생성 => CreditScore 컴포넌트 안에 넣어줘서 사용
+svg 태그 속성 공부하기
