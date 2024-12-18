@@ -1,3 +1,5 @@
+import { QuerySnapshot } from 'firebase/firestore'
+
 export interface Card {
   name: string
   corpName: string
@@ -8,4 +10,9 @@ export interface Card {
     terms: string
   }
   payback?: string
+}
+
+export interface CardResponse {
+  items: (Card & { id: string })[]
+  lastVisible: QuerySnapshot<Card> | unknown
 }

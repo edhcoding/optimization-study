@@ -1,0 +1,56 @@
+ssr + tanstack query 사용해서 추천카드 리스트 구현할거임
+
+card/index.tsx에서 ssr을 사용하려면
+getServerSideProps 를 export 해줘야 함
+
+처음에 CardListPage 컴포넌트에서
+export function getServerSideProps() {
+  console.log('getServerSideProps')
+
+  return {
+    props: {},
+  }
+}
+
+이렇게해줬음
+그리고 콘솔창에 들어갔는데 console이 안찍혀있음
+대신에 터미널을 보니까 서버쪽에서 즉 터미널에 콘솔이 찍혀있음
+
+getServerSideProps 부터 실행이되고 _app.tsx가 실행이 됨
+
+증명하기 위해서는 _app.tsx 파일에 console을 찍어보고 새로고침하고 터미널을 보면
+getServerSideProps
+App 순으로 찍혀있음
+
+그럼 다시 CardListPage로가서 데이터를 불러주려면
+getServerSideProps에 QueryClient 액션을 사용해서 데이터를 불러와야 함
+const client = new QueryClient()로 불러와서
+client가 가지고있는 prefetchInfiniteQuery 함수를 사용해서 데이터를 불러오는데
+queryKey의 값을 매칭해줘야함
+
+위와 같은 액션을 서버에서 먼저 실행해주는거임
+InfiniteQuery를 사용하기 때문에 initialPageParam을 null로 해줘야함
+
+이 액션의 수행이 끝난다음에 우리는 서버에서 수행한 데이터를 json 형태로 전달 해줘야 함
+
+return {
+    props: {
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(client))),
+    },
+  }
+
+이렇게 해주면 서버에서 수행한 데이터를 json 형태로 전달 해줘야 함
+그럼 이제 클라이언트에서는 이 데이터를 받아서 사용할 수 있음
+
+앞에서 설명했듯이 이제 이 과정이 끝나면 _app.tsx으로 넘어간다고 말했음
+
+그러면 _app.tsx에서는 dehydratedState를 받아서 다시 클라이언트에서 hydrate 과정을 거쳐서
+서버의 상태를 복원해줘야 합니다.
+
+Component 컴포넌트를 Tanstack Query에서 제공하는 HydrationBoundary로 감싸줘야 합니다.
+그다음 HydrationBoundary의 state옵션에 우리가 SSR로 넘겨준 dehydratedState를 넣어줘야 합니다.
+데이터가 잘 오는지 console.log(pageProps)를 찍어보면 확인할 수 있음
+
+----------------------------------------------------------------------------------------------------
+무한 스크롤 구현
+yarn add react-infinite-scroll-component
