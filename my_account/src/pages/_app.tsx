@@ -8,6 +8,7 @@ import {
   HydrationBoundary,
 } from '@tanstack/react-query'
 import { SessionProvider } from 'next-auth/react'
+import AuthGuard from '@/components/auth/AuthGuard'
 
 const client = new QueryClient({
   defaultOptions: {
@@ -28,7 +29,9 @@ export default function App({
       <SessionProvider session={session}>
         <QueryClientProvider client={client}>
           <HydrationBoundary state={dehydratedState}>
-            <Component {...pageProps} />
+            <AuthGuard>
+              <Component {...pageProps} />
+            </AuthGuard>
           </HydrationBoundary>
         </QueryClientProvider>
       </SessionProvider>
