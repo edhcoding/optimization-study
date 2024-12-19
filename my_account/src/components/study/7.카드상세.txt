@@ -1,0 +1,6 @@
+initialData를 이용한 초기 데이터 채우기
+But dehydrate, hydrate가 더 좋음
+
+framer motion (https://motion.dev/docs/react-upgrade-guide)
+npm install motion
+yanr add motion

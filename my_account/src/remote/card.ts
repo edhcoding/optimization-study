@@ -9,6 +9,8 @@ import {
   limit,
   getDocs,
   where,
+  doc,
+  getDoc,
 } from 'firebase/firestore'
 
 export default async function getCards(pageParam?: QuerySnapshot<Card>) {
@@ -52,4 +54,13 @@ export async function getSearchCards(keyword: string) {
     id: doc.id,
     ...(doc.data() as Card),
   }))
+}
+
+export async function getCard(id: string) {
+  const snapshot = await getDoc(doc(collection(store, COLLECTIONS.CARD), id))
+
+  return {
+    id: snapshot.id,
+    ...(snapshot.data() as Card),
+  }
 }
