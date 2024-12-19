@@ -8,6 +8,7 @@ import {
   startAfter,
   limit,
   getDocs,
+  where,
 } from 'firebase/firestore'
 
 export default async function getCards(pageParam?: QuerySnapshot<Card>) {
@@ -33,4 +34,22 @@ export default async function getCards(pageParam?: QuerySnapshot<Card>) {
     items,
     lastVisible,
   }
+}
+
+export async function getSearchCards(keyword: string) {
+  const searchQuery = query(
+    collection(store, COLLECTIONS.CARD),
+    where('name', '>=', keyword),
+    // \uf8ff는 유니코드로 문자열 추가해줌
+    // 이 유니코드 문자는 유니코드 문자열 중 가장 큰 문자열을 의미함
+    // 그래서 이 조건이 의미하는거는 키워드로 시작하는 모든 카드들을 찾아라 라고 하는 의미임
+    where('name', '<=', keyword + '\uf8ff'),
+  )
+
+  const cardSnapshot = await getDocs(searchQuery)
+
+  return cardSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Card),
+  }))
 }

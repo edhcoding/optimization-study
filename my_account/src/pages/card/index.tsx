@@ -1,5 +1,7 @@
 import Badge from '@/components/shared/Badge'
+import Input from '@/components/shared/Input'
 import ListRow from '@/components/shared/ListRow'
+import Top from '@/components/shared/Top'
 import { CardResponse } from '@/models/card'
 import getCards from '@/remote/card'
 import { QueryClient, dehydrate, useInfiniteQuery } from '@tanstack/react-query'
@@ -35,6 +37,10 @@ export default function CardListPage() {
 
   return (
     <div>
+      <Top title="추천카드" subTitle="회원님을 위해 준비했어요." />
+      <div style={{ padding: '0 24px 12px 24px' }}>
+        <Input onFocus={() => navigate.push('/card/search')} />
+      </div>
       <InfiniteScroll
         dataLength={cards.length}
         next={loadMore}

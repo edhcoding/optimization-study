@@ -54,3 +54,6 @@ Component 컴포넌트를 Tanstack Query에서 제공하는 HydrationBoundary로
 ----------------------------------------------------------------------------------------------------
 무한 스크롤 구현
 yarn add react-infinite-scroll-component
+
+-------------------------
+검색기능 구현
