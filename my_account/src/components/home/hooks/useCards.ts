@@ -3,7 +3,7 @@ import getCards from '@/remote/card'
 
 export default function useCards() {
   return useSuspenseQuery({
-    queryKey: ['cards'],
+    queryKey: ['home-cards'],
     queryFn: () => getCards(),
   })
 }

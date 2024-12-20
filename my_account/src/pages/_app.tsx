@@ -6,10 +6,18 @@ import {
   QueryClient,
   QueryClientProvider,
   HydrationBoundary,
+  QueryCache,
 } from '@tanstack/react-query'
 import { SessionProvider } from 'next-auth/react'
 import AuthGuard from '@/components/auth/AuthGuard'
 import Navbar from '@/components/shared/Navbar'
+import { AlertContextProvider } from '@/contexts/AlertContext'
+
+interface QueryMetaType {
+  onSuccess?: (data: unknown) => void
+  onError?: (error: unknown) => void
+  errorMessage?: string
+}
 
 const client = new QueryClient({
   defaultOptions: {
@@ -17,6 +25,21 @@ const client = new QueryClient({
       refetchOnWindowFocus: false,
     },
   },
+  queryCache: new QueryCache({
+    onSuccess: (data, query: { meta?: QueryMetaType }) => {
+      if (query.meta?.onSuccess) {
+        query.meta.onSuccess(data)
+      }
+    },
+    onError: (error, query: { meta?: QueryMetaType }) => {
+      if (query.meta?.onError) {
+        query.meta.onError(error)
+      }
+      if (query.meta?.errorMessage) {
+        console.error(query.meta.errorMessage)
+      }
+    },
+  }),
 })
 
 export default function App({
@@ -30,10 +53,12 @@ export default function App({
       <SessionProvider session={session}>
         <QueryClientProvider client={client}>
           <HydrationBoundary state={dehydratedState}>
-            <AuthGuard>
-              <Navbar />
-              <Component {...pageProps} />
-            </AuthGuard>
+            <AlertContextProvider>
+              <AuthGuard>
+                <Navbar />
+                <Component {...pageProps} />
+              </AuthGuard>
+            </AlertContextProvider>
           </HydrationBoundary>
         </QueryClientProvider>
       </SessionProvider>

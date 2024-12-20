@@ -13,9 +13,6 @@ export default NextAuth({
     // GoogleProvider가 실행되고 구글 페이지에서 인증 동작을 거친 후에 동작하는 session 함수 정의
     // session 함수에는 session, token, user 인자가 넘어옴 이 안에 들어있는 값들을 조합해서 우리는 어떤 값을 세션에 남길건가 결정할 수 있음
     session({ session, token }) {
-      console.log('session', session)
-      console.log('token', token)
-
       if (session.user) {
         // 세션에 유저가 있다 = 로그인 됐다
         // tonken의 sub는 유저의 고유 식별자를 가지고 있는데 우리는 이걸 session.user.id에 할당해주고 싶음

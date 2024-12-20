@@ -42,7 +42,7 @@ export default function CardListPage() {
         <Input onFocus={() => navigate.push('/card/search')} />
       </div>
       <InfiniteScroll
-        dataLength={cards.length}
+        dataLength={cards?.length}
         next={loadMore}
         hasMore={hasNextPage}
         loader={<ListRow.Skeleton />}
