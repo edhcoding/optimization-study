@@ -1,0 +1,143 @@
+월별 자산 그래프
+visx 라이브러리 사용 (https://airbnb.io/visx)
+visx 라이브러리는 airbnb팀이 d3 , react를 사용해서 만든 라이브러리임
+d3만 사용하지않고 react 친화적인 라이브러리임
+
+visx는 여러가지 차트유형 컴포넌트를 지원함
+gallery의 bar 차트를 이용해볼건데
+
+예제를 보면 너비(width) 값을 받고 있음
+너비 값을 유동적으로 지원해주고 싶기 때문에 visx에서 지원해주는 responsive 컴포넌트를 사용하면 유동적으로 가져올 수 있음
+
+(https://www.npmjs.com/package/@visx/responsive)
+
+yarn add @visx/responsive
+yarn add @visx/group @visx/shape @visx/scale
+
+장점: visx는 컴포넌트마다 라이브러리가 쪼개져 있어서 필요한것만 설치해서 사용하기 좋음
+
+아래 코드까지는 bar 차트를 그리는 코드임
+yarn add @visx/responsive @visx/group @visx/shape @visx/scale 이것만 사용
+
+import ParentSize from '@visx/responsive/lib/components/ParentSize'
+import { memo, useMemo } from 'react'
+import { Bar } from '@visx/shape'
+import { Group } from '@visx/group'
+import { scaleBand, scaleLinear } from '@visx/scale'
+import { colors } from '@/styles/colorPalette'
+
+// 월별 데이터
+// 날짜: 월별 마지막일자
+// 잔고: 월별 마지막일자의 잔고
+
+interface ChartData {
+  // 우리는 date를 x축, balance(잔고)를 y축으로 삼을거임
+  date: string
+  balance: number
+}
+
+interface MonthlyChartProps {
+  chartData: ChartData[]
+  width: number
+  height: number
+}
+
+const verticalMargin = 120
+
+// accessors
+const getX = (d: ChartData) => d.date
+const getY = (d: ChartData) => d.balance
+
+function MonthlyChart({ chartData, width, height }: MonthlyChartProps) {
+  // bounds
+  const xMax = width // x축
+  const yMax = height - verticalMargin // y축
+
+  // scales, memoize for performance
+  const xScale = useMemo(
+    // bar 하나하나 x값들
+    () =>
+      scaleBand<string>({
+        range: [0, xMax],
+        round: true,
+        domain: chartData.map(getX),
+        padding: 0.4,
+      }),
+    [chartData, xMax],
+  )
+  const yScale = useMemo(
+    // bar 하나하나 y값들
+    () =>
+      scaleLinear<number>({
+        range: [yMax, 0],
+        round: true,
+        domain: [0, Math.max(...chartData.map(getY))],
+      }),
+    [chartData, yMax],
+  )
+
+  return width < 10 ? null : (
+    <svg width={width} height={height}>
+      <rect width={width} height={height} fill="url(#teal)" rx={14} />
+      <Group top={verticalMargin / 2}>
+        {chartData.map((d) => {
+          const date = getX(d)
+          const barWidth = xScale.bandwidth()
+          const barHeight = yMax - (yScale(getY(d)) ?? 0)
+          const barX = xScale(date)
+          const barY = yMax - barHeight
+          return (
+            <Bar
+              key={date}
+              x={barX}
+              y={barY}
+              width={barWidth}
+              height={barHeight}
+              fill={colors.blue}
+            />
+          )
+        })}
+      </Group>
+    </svg>
+  )
+}
+
+interface ChartWrapperProps {
+  height?: number
+  chartData: ChartData[]
+}
+
+function ChartWrapper({ height = 200, chartData }: ChartWrapperProps) {
+  return (
+    <ParentSize>
+      {/* ParentSize 컴포넌트가 뷰포트의 너비를 측정해서 너비를 전달해줌 */}
+      {({ width }) => (
+        <MonthlyChart width={width} height={height} chartData={chartData} />
+      )}
+    </ParentSize>
+  )
+}
+
+// 차트를 그리는 작업은 무거운 작업이라서 memo 처리해서 내보내주고 싶음, 그리고 실시간으로 계속 바뀌는 데이터가 아니기도 함
+export default memo(ChartWrapper)
+
+------------- 여기까지 그리면 막대차트만 나오고 아래에 글씨는 안나옴 (x축, y축 데이터를 어떤걸 삼고 있는지)
+axis 보니까 bar stack이 지금 우리가 원하는 차트 그래프랑 비슷함 https://airbnb.io/visx/barstack
+
+대충 예제 보니까
+import { AxisBottom } from '@visx/axis';
+
+<AxisBottom
+  top={yMax + margin.top}
+  scale={dateScale}
+  tickFormat={formatDate}
+  stroke={purple3}
+  tickStroke={purple3}
+  tickLabelProps={{
+    fill: purple3,
+    fontSize: 11,
+    textAnchor: 'middle',
+  }}
+/> bottom ~~~ 이러는거 보니까 예가 차트 아래에 정보를 넣어주는 것 같음
+그래서 Group 컴포넌트 아래에 넣어주면 될거같음
+yarn add @visx/axis
