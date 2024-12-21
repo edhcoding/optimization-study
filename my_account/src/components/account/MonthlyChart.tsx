@@ -29,6 +29,9 @@ const getX = (d: ChartData) => d.date
 const getY = (d: ChartData) => d.balance
 const formatDate = (date: string) => format(parseISO(date), 'M월')
 
+// bar chart - https://airbnb.io/visx/bars
+// bar stack - https://airbnb.io/visx/barstack (차트 아래에 정보 표기할때 - tooltip도 사용 가능한데 구현 x)
+
 function MonthlyChart({ chartData, width, height }: MonthlyChartProps) {
   // bounds
   const xMax = width // x축

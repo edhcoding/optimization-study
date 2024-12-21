@@ -141,3 +141,9 @@ import { AxisBottom } from '@visx/axis';
 /> bottom ~~~ 이러는거 보니까 예가 차트 아래에 정보를 넣어주는 것 같음
 그래서 Group 컴포넌트 아래에 넣어주면 될거같음
 yarn add @visx/axis
+
+
+----------------------
+이번엔 파이 차트 만들어 볼거임
+visx에 안나오는 차트 예제도 많음 - 그럴때는 구글에 그냥 검색 ex) visx pie chart (https://codesandbox.io/p/sandbox/visx-simple-pie-chart-tf4ed?file=%2Fpackage.json)
+샌드박스 보면서 구현해볼거임
