@@ -1,6 +1,6 @@
 import useEventBanners from '@/components/home/hooks/useEventBanners'
 import Flex from '@/components/shared/Flex'
-import withSuspense from '@/components/shared/hocs/withSuspense'
+import withSuspense from '@/hooks/withSuspense'
 import Skeleton from '@/components/shared/Skeleton'
 import Text from '@/components/shared/Text'
 import { css } from '@emotion/react'
