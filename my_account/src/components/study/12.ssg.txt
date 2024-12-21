@@ -1,0 +1,8 @@
+faq ssg 적용해보기
+
+getStaticProps 함수를 만들어서 데이터를 가져오기
+
+yarn build
+.next/server/pages/faq.html 파일 생성 확인
+안에보면 faq 데이터가 이미 불러와져 있음
+이렇게 이미 데이터를 가진 상태의 HTML을 만들어주느게 SSG 방식임
