@@ -1,7 +1,7 @@
 import { COLLECTIONS } from '@/constants/collection'
 import { Account } from '@/models/account'
 import { store } from '@/remote/firebase'
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 export default function setTerms({
   userId,
@@ -49,4 +49,12 @@ export async function getAccount(userId: string) {
     id: snapshot.id,
     ...(snapshot.data() as Account),
   }
+}
+
+export function updateAccountBalance(userId: string, balance: number) {
+  const snapshot = doc(collection(store, COLLECTIONS.ACCOUNT), userId)
+
+  return updateDoc(snapshot, {
+    balance,
+  })
 }
