@@ -12,6 +12,7 @@
     "@babel/runtime": "^7.26.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@plaiceholder/next": "^3.0.0",
     "@tanstack/react-query": "^5.62.8",
     "@visx/axis": "^3.12.0",
     "@visx/group": "^3.12.0",
@@ -23,11 +24,13 @@
     "motion": "^11.15.0",
     "next": "^14.1.0",
     "next-auth": "^4.24.11",
+    "plaiceholder": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2",
     "react-infinite-scroll-component": "^6.1.0",
     "react-markdown": "^9.0.1",
+    "sharp": "^0.33.5",
     "swiper": "^9.0.0"
   },
   "devDependencies": {

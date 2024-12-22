@@ -1,3 +1,5 @@
+import withPlaiceholder from '@plaiceholder/next'
+
 const nextConfig = {
   /* config options here */
   reactStrictMode: true,
@@ -12,6 +14,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.googleusercontent.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.pixabay.com',
+      },
     ],
   },
   experimental: {
@@ -22,4 +28,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default withPlaiceholder(nextConfig)
