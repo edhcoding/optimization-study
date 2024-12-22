@@ -12,8 +12,10 @@ export default function withAuth<Props = Record<string, never>>(
 
     const router = useRouter()
 
-    // 로딩은 끝났지만 세션이 비어있다 => 세션이 만료됐거나 로그인하지 않은 사용자
-    if (status !== 'loading' && data == null) {
+    if (status === 'loading') return null
+
+    // 데이터가 비어있다면 로그인 페이지로 이동
+    if (data == null) {
       router.replace('/auth/signin')
 
       return null

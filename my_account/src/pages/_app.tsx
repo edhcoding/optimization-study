@@ -9,7 +9,6 @@ import {
   QueryCache,
 } from '@tanstack/react-query'
 import { SessionProvider } from 'next-auth/react'
-import AuthGuard from '@/components/auth/AuthGuard'
 import Navbar from '@/components/shared/Navbar'
 import { AlertContextProvider } from '@/contexts/AlertContext'
 
@@ -54,10 +53,8 @@ export default function App({
         <QueryClientProvider client={client}>
           <HydrationBoundary state={dehydratedState}>
             <AlertContextProvider>
-              <AuthGuard>
-                <Navbar />
-                <Component {...pageProps} />
-              </AuthGuard>
+              <Navbar />
+              <Component {...pageProps} />
             </AlertContextProvider>
           </HydrationBoundary>
         </QueryClientProvider>

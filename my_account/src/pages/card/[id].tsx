@@ -10,6 +10,7 @@ import Image from 'next/image'
 import Flex from '@/components/shared/Flex'
 import Text from '@/components/shared/Text'
 import dynamic from 'next/dynamic'
+import SEO from '@/components/shared/SEO'
 
 const FixedButton = dynamic(() => import('@/components/shared/FixedButton'), {
   ssr: false,
@@ -40,6 +41,12 @@ export default function CardDetailPage({ initialCard }: CardDetailPageProps) {
 
   return (
     <div>
+      <SEO
+        title={`${corpName} ${name}`}
+        description={subTitle}
+        image="https://cdn.pixabay.com/photo/2024/11/27/05/42/ai-generated-9227230_1280.jpg"
+      />
+
       <Top title={`${corpName} ${name}`} subTitle={subTitle} />
 
       <ul>
