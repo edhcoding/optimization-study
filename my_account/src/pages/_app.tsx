@@ -11,6 +11,7 @@ import {
 import { SessionProvider } from 'next-auth/react'
 import Navbar from '@/components/shared/Navbar'
 import { AlertContextProvider } from '@/contexts/AlertContext'
+import ErrorBoundary from '@/components/shared/ErrorBoundary'
 
 interface QueryMetaType {
   onSuccess?: (data: unknown) => void
@@ -52,10 +53,12 @@ export default function App({
       <SessionProvider session={session}>
         <QueryClientProvider client={client}>
           <HydrationBoundary state={dehydratedState}>
-            <AlertContextProvider>
-              <Navbar />
-              <Component {...pageProps} />
-            </AlertContextProvider>
+            <ErrorBoundary>
+              <AlertContextProvider>
+                <Navbar />
+                <Component {...pageProps} />
+              </AlertContextProvider>
+            </ErrorBoundary>
           </HydrationBoundary>
         </QueryClientProvider>
       </SessionProvider>

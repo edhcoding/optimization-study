@@ -7,6 +7,7 @@ import { css } from '@emotion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import ErrorBoundary from '@/components/shared/ErrorBoundary'
 
 function EventBanners() {
   const { data } = useEventBanners()
@@ -44,6 +45,17 @@ function EventBanners() {
   )
 }
 
+// 이렇게 작성하게 되면 EventBanners에서 작성한 에러는 ErrorBoundary로 흘러들어오게 됩니다.
+function WrapErrorBoundary() {
+  return (
+    <ErrorBoundary
+      fallbackComponent={<div>이벤트 배너에 문제가 생겼어요!</div>}
+    >
+      <EventBanners />
+    </ErrorBoundary>
+  )
+}
+
 const bannerStyles = css`
   padding: 24px;
   border-radius: 8px;
@@ -57,7 +69,7 @@ export function BannerSkeleton() {
   )
 }
 
-export default withSuspense(EventBanners, {
+export default withSuspense(WrapErrorBoundary, {
   // 컴포넌트가 렌더링 될때 CLS가 생기니까 스켈레톤 컴포넌트 렌더링
   // Dynamic import의 loading 옵션에도 똑같이 넣어줬음
   fallback: <BannerSkeleton />,
