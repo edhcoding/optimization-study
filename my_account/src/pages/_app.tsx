@@ -12,6 +12,7 @@ import { SessionProvider } from 'next-auth/react'
 import Navbar from '@/components/shared/Navbar'
 import { AlertContextProvider } from '@/contexts/AlertContext'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
+import { useReportWebVitals } from 'next/web-vitals'
 
 interface QueryMetaType {
   onSuccess?: (data: unknown) => void
@@ -46,6 +47,10 @@ export default function App({
   Component,
   pageProps: { dehydratedState, session, ...pageProps },
 }: AppProps) {
+  // useReportWebVitals((metric) => {
+  //   console.log(metric)
+  // })
+
   return (
     // App, _document 파일에 적절하게 SEO 메타 태그를 분리해서 배치했음
     <Layout>

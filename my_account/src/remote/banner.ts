@@ -17,9 +17,10 @@ export default async function getEventBanners({
 
   const snapshot = await getDocs(eventBannerQuery)
 
-  if (snapshot.docs.length === 1) {
-    throw new Error('이벤트 배너에 에러 발생!')
-  }
+  // 일부러 에러 발생시킬때 사용
+  // if (snapshot.docs.length === 1) {
+  //   throw new Error('이벤트 배너에 에러 발생!')
+  // }
 
   return snapshot.docs.map((doc) => ({
     id: doc.id,
